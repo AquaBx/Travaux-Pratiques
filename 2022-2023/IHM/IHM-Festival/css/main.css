@@ -1,0 +1,267 @@
+@font-face {
+    font-family: Herdrock;
+    src: url(../Herdrock.ttf);
+  }
+
+:root{
+    --main : rgb(252, 252, 252);
+    --secondary : rgb(39, 41, 50);
+    --text : rgb(39, 41, 50);
+    --text-secondary : rgb(252, 252, 252);
+    --hover : rgb(255, 160, 50);
+    --action : rgb(200, 0, 0);
+    --a: rgb(255, 237, 41);
+}
+
+
+html {
+    color : var(--text);
+    background-color: var(--main);
+    scroll-behavior: smooth;
+}
+
+body {
+    margin:0;
+    font-family: Cascadia, sans-serif !important;
+    font-size: 1rem;
+    line-height: normal;
+
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+iframe{
+    margin: auto;
+    display: block;
+    border-radius:12px;
+    border: none;
+    margin-top: 1em;
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+/*
+############
+## header ##
+############
+*/
+
+header {
+    background: var(--main);
+    display: block;
+    overflow: hidden;
+    position: relative;
+    
+}
+
+header > h1 > a {
+    color:var(--text-secondary);
+    text-decoration: none;
+}
+
+header > * {
+    flex:1;
+    text-align: center;
+}
+
+header h1{
+    margin:1rem;
+    position: relative;
+
+    /* font-family: Cambria, sans-serif;
+    text-shadow: rgba(125, 125, 220, 0.3) 0.1rem 0.1rem ; */
+
+    background-image: url(../backtitle.webp);
+    background-size: 7em 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    line-height: 1;
+    font-weight: normal;
+    font-size: 5em ;
+    font-family: Herdrock;
+
+}
+
+header img {
+    width: clamp(1em,75%,20rem);
+    margin:auto;
+    display: block;
+}
+
+table {
+    border-collapse: collapse;
+    width:100%;
+}
+
+table thead {
+    background-color: #d6d6d6;
+}
+
+table td , table th{
+    border:1px solid var(--text) !important;
+    padding:0.5rem;
+}
+
+hr {
+    margin:2rem 0px;
+}
+
+
+label,img {
+    user-select: none;
+    
+}
+
+
+
+
+/*
+############
+## navbar ##
+############
+*/
+
+nav {
+    background-color: var(--secondary);
+    position: sticky;
+    top:0;
+    overflow: auto;
+    z-index: 20;
+}
+
+nav ul {
+    margin:0;
+    padding:0;
+    display: flex;
+    list-style-type: none;
+}
+
+nav ul li {
+    flex:1;
+    font-variant: small-caps;
+    text-align: center;
+}
+
+nav ul li a {
+    padding:1em !important;
+    display: block !important;
+    color:var(--text-secondary) !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+nav ul li:hover , nav ul li.active{
+    background-color: var(--hover);
+}
+
+nav ul li:active{
+    background-color: var(--action);
+}
+
+/*
+Contenu
+*/
+
+p {
+    line-height: 2em;
+}
+
+.carousel-caption > h3{
+    width: fit-content;
+    margin: auto;
+    background: black;
+    padding: 0.5em 0.75em;
+}
+a, nav > ul > li {
+    transition: 0.3s;
+    color:var(--action);
+
+}
+
+a:hover {
+    color: var(--hover);
+}
+
+a:visited{
+}
+
+
+main > * {
+    width : clamp(1em,95%,50em);
+    margin:auto;
+}
+
+main > section > img {
+    width: 100%;
+    margin: 1em auto;
+    display: block;
+}
+
+main {
+    padding:2em;
+    flex:1;
+}
+
+
+
+p{
+    text-align: justify;
+}
+
+p::after,p::before{
+	content:"";
+	clear:both;
+    display: block;
+}
+
+p > img{
+    float: left;
+    vertical-align: top;
+    width: clamp(0px,100%,15em);
+    margin-right:1em;  
+}
+
+/*
+############
+## footer ##
+############
+*/
+
+footer.footer {
+    all:unset;
+    display: flex;
+    background-color: var(--secondary);
+    justify-content: space-between;
+    position:relative;
+    width: calc(100% - 2em);
+    bottom: 0;
+    padding:1em !important;
+    color:var(--text-secondary);
+}
+
+footer.footer > * {
+    all:unset;
+    flex:1;
+    text-align: center;
+}
+
+footer.footer .author {
+    display:flex;
+    gap:2em;
+}
+
+/*
+############
+## mobile ##
+############
+*/
+
+/* osef si y'a pas d'image dans le header */
+
+@media screen and (max-width:600px) {
+    header{
+        flex-direction: column-reverse; 
+    }
+}
