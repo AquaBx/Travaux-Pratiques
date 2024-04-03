@@ -1,0 +1,91 @@
+Installer google_test sur sa machine
+------------------------------------
+
+Désarchiver google_test.tar.gz dans le répertoire de votre choix, mais PAS
+dans le répertoire d'un de vos projets. Notez l'emplacement de ce
+répertoire ; il sera désigné par GTEST dans la suite.
+
+Remarque : pour désarchiver une archive tar en ligne de commande il faut procéder ainsi :
+
+- se placer dans le répertoire de destination
+  (celui où vous voulez désarchiver l'archive)
+- exécuter la commande : tar -xvf chemin/vers/archive.tar
+
+si l'archive est compressée (archive.tar.gz), la commande devint :
+tar -zxvf chemin/vers/archive.tar.gz
+
+(man tar pour plus d'informations)
+
+Utilisation google_test avec eclipse
+------------------------------------
+
+Pour tester en dehors d'eclipse, voir les instructions tout en bas
+
+Pour tester depuis eclipse, c'est ici :
+
+1. Créer un 2ème projet, OBLIGATOIREMENT avec Linux GCC
+2. Ouvrir un terminal
+3. Se placer dans le répertoire du projet de test
+4. Désarchiver dans ce répertoire l'archive du test (générique ou non, selon le cas)
+5. Faire des liens symboliques vers les fichiers sources du
+   projet à tester (pas le programme client)
+
+   ln -s chemin_vers_projet/fichier_source.cpp .
+   ln -s chemin_vers_projet/fichier_entete.h   .
+
+6. La suite de la configuration est à faire sous eclipse... il faut
+   lui indiquer où trouver les fichiers à inclure pour la compilation
+   ainsi que les bibliothèques pour l'édition de liens. Si on suppose
+   que google_test a été installé dans le répertoire GTEST
+
+Dans les propriétés du projet, C/C++ Build, Settings :
+
+ . rubrique C++ Compiler, includes (paths) ajoutez :
+	GTEST/include
+
+ . rubrique C++ Linker, libraries, partie du haut ajoutez :
+	pthread
+
+ . rubrique C++ Linker, Miscellaneous, Other objects ajoutez : 
+	GTEST/lib/libgtest.a
+
+7. Pour tester la première partie, il faut dire à eclipse de ne pas compiler
+   test_vecteur_p2.cc :
+   - clic droit sur test_vecteur_p2.cc dans l'explorateur de projet
+   - Properties : cocher Exclude resource from Build
+
+8. Contruire le projet ; on peut ensuite exécuter le test comme un
+   projet normal directement depuis eclipse.
+
+Remarques : 
+ - Mettre en commentaire les tests des fonctions non encore programmées
+ - Pour désactiver une fonction de test, il suffit de placer DISABLED_
+   devant son nom => cette fonction ne sera pas exécutée lors du test
+
+exemple : TEST(TestVecteur, DISABLED_q4_Add)
+
+9. Pour tester la deuxième partie, il faut réintégrer test_vecteur_p2.cc :
+   - clic droit sur test_vecteur_p2.cc dans l'explorateur de projet
+   - Properties : décocher Exclude resource from Build
+
+Documentation google_test : 
+ - locale : /share/esir1/prog/google_test/google_test_primer.pdf
+ - sur le net : https://code.google.com/p/googletest/wiki/Documentation
+
+------------------------------------------------------------------------
+
+Pour tester en dehors d'eclipse :
+
+1) Créer un répertoire en dehors du répertoire du projet vecteur
+2) Copier dans ce répertoire les fichiers du programme de test (test*), ainsi
+   que le Makefile
+3) Faire des liens symboliques vers les fichiers sources du
+   projet à tester
+
+   ln -s chemin_vers_projet/fichier_source.cpp .
+   ln -s chemin_vers_projet/fichier_entete.h   .
+
+4) tapez make test1 pour fabriquer puis exécuter le test de la 1ère partie, make test2 pour
+   la 2ème partie, make pour les 2.
+
+voir plus haut pour désactiver un test

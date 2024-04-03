@@ -1,0 +1,137 @@
+---
+title: "Compte-rendu TP sur l'intégration numérique"
+format: 
+  typst:
+    toc: true
+    section-numbering: "1.1 :"
+    author: Tom Chauvel
+    keep-typ: true
+
+render-on-save: true
+
+engine: jupyter
+jupyter: python3
+---
+
+```{=typst}
+#pagebreak()
+= Exercice 1 : Résolution de systèmes d’équations linéaires
+```
+
+```{python}
+import numpy as np
+```
+
+```{python}
+
+A = np.matrix([
+  [ 0, 2, 0, 1],
+  [ 2, 2, 3, 2],
+  [ 4,-3, 0, 1],
+  [ 6, 1,-6,-5]
+])
+
+B = np.matrix([
+  [ 0],
+  [-2],
+  [-7],
+  [ 6],
+])
+
+print(np.linalg.inv(A).dot(B))
+
+```
+
+# Exercice 2
+```{python}
+
+A = np.matrix([
+  [ 5, 6 ],
+  [ 6, 7 ],
+  [ 1, 1 ]
+])
+
+B = np.matrix([
+  [ 3],
+  [ 1],
+  [-5],
+])
+
+# print(np.linalg.inv(A).dot(B))
+# il n'y a pas de solutions
+
+def f(A,B,x,y):
+  ax = np.matrix([[x],[y]])
+  return np.linalg.norm( A.dot(ax) - B )
+
+f(A,B,-28,24)
+
+
+
+```
+
+## Moore-Penrose pseudo-inverse
+
+```{python}
+import time
+
+def solveMoore(A,B):
+  A_plus = np.linalg.inv(A.T.dot(A)).dot(A.T)
+  return A_plus.dot(B)
+
+t = time.time()
+
+res = solveMoore(A,B)
+
+print("temps" , time.time()-t)
+print(res)
+```
+
+## passage à l'échelle
+
+```{python}
+
+import numpy.random as rd
+
+def surdeter(row,col):
+  A = np.random.randint(1024, size=(row, col)) - 512 
+  B = np.random.randint(1024, size=(row, 1)) - 512 
+  return A,B
+
+A,B = surdeter(3,2)
+
+# res = solveMoore(A,B)
+
+# print(A)
+# print(B)
+# print(res)
+# print(f(A,B,res[0,0],res[1,0]))
+```
+
+
+## Regression polynomiale
+
+```{python}
+
+import matplotlib.pyplot as plt
+
+pts = [(-1,1),(3,0),(0,1),(-2,-2),(2,3)]
+
+for x,y in pts:
+  plt.scatter(x, y)
+
+xs = np.linspace(-2,3,100)
+
+A = np.matrix([[pt[0]**i for i in range(3)] for pt in pts])
+B = np.matrix([[pt[1]] for pt in pts])
+
+res = solveMoore(A,B)
+
+res = [r[0,0] for r in res]
+res.reverse()
+
+
+plt.plot( xs,np.polyval(np.poly1d(res),xs) )
+
+plt.show()
+```

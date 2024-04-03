@@ -1,0 +1,402 @@
+---
+title: "Compte-rendu TP 3 Probabilités"
+format: 
+  typst:
+    toc: true
+    section-numbering: "1.a :"
+    author: Tom Chauvel
+    keep-typ: true
+
+render-on-save: true
+
+engine: jupyter
+jupyter: python3
+---
+
+```{=typst} 
+#let cell = rect.with(  inset: 8pt,  width: 100% );
+#set par(justify: true);
+
+
+#pagebreak()
+```
+# Introduction
+
+L'objectif de notre TP est de pouvoir estimer la moyenne et la variance d'une variable alétoire. Ensuite nous étudierons ceci sur un vecteur aléatoire possédant une densité de probabilité conjointe.
+
+# Partie 1
+
+## Calcul de l'espérance et de la variance
+
+```{=typst}
+
+*Calcul de l'espérance*
+$
+E(X) = integral_0^(+infinity) x f_X (x) d x = integral_0^(+infinity) x lambda e^(-lambda x) d x
+$
+
+Intégration par partie :
+
+$
+E(X) = [-x e^(-lambda x)]_0^(+infinity) - integral_0^(+infinity)- e^(-lambda x) d x
+$
+
+$
+E(X) = [-x e^(-lambda x)]_0^(+infinity) - [- e^(-lambda x)/(-lambda)]_0^(+infinity)
+$
+
+$
+E(X) = [-x e^(-lambda x) - e^(-lambda x)/(lambda)]_0^(+infinity)
+$
+
+$
+E(X) = [ e^(-lambda x) ( 1/(lambda) + x)]_(+infinity)^0 = 1/lambda
+$
+
+*Calcul de l'espérance des carrés*
+
+$
+E(X^2) = integral_0^(+infinity) x^2 f_X (x) d x = integral_0^(+infinity) x^2 lambda e^(-lambda x) d x
+$
+
+Intégration par partie :
+
+$
+E(X^2) = [-x^2 e^(-lambda x)]_0^(+infinity) - integral_0^(+infinity)-2 x e^(-lambda x) d x
+$
+
+$
+E(X^2) = 0 + 2/lambda integral_0^(+infinity) x lambda e^(-lambda x) d x
+$
+
+$
+E(X^2) = 2/lambda E(X) = 2/(lambda^2)
+$
+
+*Calcul de la variance*
+$
+V(X) = E(X^2) - E^2(X) = 2/(lambda^2) - (1/lambda)^2 = 1/(lambda^2)
+$
+
+*Application Numérique*
+
+$
+lambda = 0.5
+$
+
+$
+E(X) = 1/lambda = 1/0.5 = 2
+$
+
+$
+V(X) = 1/(lambda^2) = 1/0.25 = 4
+$
+
+```
+
+## Calcul de la fonction de répartition
+
+```{=typst}
+$
+F(x) = integral_0^x f_X (x) d x = integral_0^x lambda e^(-lambda x)  d x
+$
+
+$
+F(x) = [- e^(-lambda x)]_0^x =  [- e^(-lambda x)]_x^0
+$
+
+$
+F(x) = [- e^(-lambda x)]_0^x =  [e^(-lambda x)]_x^0
+$
+
+$
+F(x) = 1 - e^(-lambda x)
+$
+
+*Application Numérique*
+
+$
+lambda = 0.5
+$
+
+$
+F(x) = 1 - e^(-lambda x) = 1 - e^(-0.5 x)
+$
+```
+
+Maintenant affichons la densité de probabilité et la fonction de répartition.
+
+On importe les librairies
+```{python}
+import numpy as np
+import numpy.random as rd
+import matplotlib.pyplot as plt
+```
+
+```{=typst}
+#pagebreak()
+```
+
+on définit l
+```{python}
+
+l = 0.5
+
+```
+
+on définit la densité de probabilité et la fonction de répartition
+```{python}
+
+p = lambda x: l*np.e**(-l*x)
+f = lambda x: 1-np.exp(-l*x)
+
+```
+
+
+```{python}
+
+x = np.arange(0,10,0.1)
+
+repartititon = f(x)
+densite = p(x)
+
+```
+
+
+On affiche nos courbes
+```{python}
+#| fig-cap: "Affichage de la densité de probabilité et la fonction de répartition"
+
+plt.figure(1)
+plt.plot(x,repartititon, label='densite')
+plt.plot(x,densite, label='repartition')
+plt.legend(loc='best')
+plt.show()
+```
+
+rien de nouveau, on retrouve une courbe similaire au tp d'avant.
+
+## Différence entre la fonction numpy et notre méthode
+
+on défini notre inverse
+```{python}
+f_inv = lambda u: -np.log(1-u)/l
+```
+
+on calcule nos expérimentations avec la fonction numpy et la notre.
+```{python}
+essai = 100
+
+inverse_exp = f_inv( rd.rand(essai) )
+inverse_theo = rd.exponential(scale=1/l, size=essai)
+```
+
+Ici on plot avec la méthode d'inversion
+```{python}
+#| fig-cap: "Affichage de la densité de probabilité et l'histogramme des variables aléatoires"
+
+plt.figure(2)
+plt.plot(x,densite)
+plt.hist(inverse_exp,x, density='True')
+plt.show()
+```
+```{=typst}
+#pagebreak()
+```
+Et la avec la fonction exponentielle de numpy
+```{python}
+#| fig-cap: "Affichage de la densité de probabilité et l'histogramme de l'exponentille"
+
+plt.figure(3)
+plt.plot(x,densite)
+plt.hist(inverse_theo,x, density='True')
+plt.show()
+```
+
+en fonction des tirages, les plots sont plus ou moins similaires. Ceci s'explique surement à cause du faible nombre d'essais.
+
+## Calculs espérance et variance
+
+Comme on suppose l'ergodicité, on peut faire : 
+```{python}
+
+mu = np.mean(inverse_exp)
+mu2 = np.dot(inverse_exp,inverse_exp) / len(inverse_exp)
+var = mu2 - mu**2
+print( "Espérance :", mu )
+print( "Variance  :", var )
+
+```
+
+Comme le nombre de tirages est faible, le nombre de tirage est un peu différent mais reste cohérant avec nos valeurs calculées: E(X) = 2 et V(X) = 4
+
+```{=typst}
+#pagebreak()
+```
+
+## Nouveaux tirages avec 1000 et 50000
+
+Pour 1000 tirages
+```{python}
+essai = 1000
+
+inverse_exp = f_inv( rd.rand(essai) )
+inverse_theo = rd.exponential(scale=1/l, size=essai)
+```
+
+plot méthode d'inversion
+```{python}
+#| fig-cap: "Affichage de la densité de probabilité et l'histogramme de la variable aléatoire"
+
+
+plt.figure(4)
+plt.plot(x,densite)
+plt.hist(inverse_exp,x, density='True')
+plt.show()
+```
+```{=typst}
+#pagebreak()
+```
+plot exponentielle
+```{python}
+#| fig-cap: "Affichage de la densité de probabilité et l'histogramme de l'exponentille"
+
+plt.figure(5)
+plt.plot(x,densite)
+plt.hist(inverse_theo,x, density='True')
+plt.show()
+```
+
+```{python}
+
+mu = np.mean(inverse_exp)
+mu2 = np.dot(inverse_exp,inverse_exp) / len(inverse_exp)
+var = mu2 - mu**2
+print( "Espérance :", mu )
+print( "Variance  :", var )
+
+```
+```{=typst}
+#pagebreak()
+```
+Pour 50000 tirages
+
+```{python}
+essai = 50000
+
+inverse_exp = f_inv( rd.rand(essai) )
+inverse_theo = rd.exponential(scale=1/l, size=essai)
+```
+
+plot méthode d'inversion
+```{python}
+#| fig-cap: "Affichage de la densité de probabilité et l'histogramme de la variable aléatoire"
+plt.figure(6)
+plt.plot(x,densite)
+plt.hist(inverse_exp,x, density='True')
+plt.show()
+```
+```{=typst}
+#pagebreak()
+```
+plot exponentielle
+```{python}
+#| fig-cap: "Affichage de la densité de probabilité et l'histogramme de l'exponentille"
+
+plt.figure(7)
+plt.plot(x,densite)
+plt.hist(inverse_theo,x, density='True')
+plt.show()
+```
+```{python}
+
+mu = np.mean(inverse_exp)
+mu2 = np.dot(inverse_exp,inverse_exp) / len(inverse_exp)
+var = mu2 - mu**2
+print( "Espérance :", mu )
+print( "Variance  :", var )
+
+```
+
+On remarque que plus le nombre d'essais augmente, plus la répartition des variables aléatoires colle avec la courbe de densité. Ce qui implique que la loi des grands nombres est utilisable sur une simulation informatique.
+```{=typst}
+#pagebreak()
+```
+# Deuxième Partie
+
+## Génération du vecteur aléatoire
+
+On initialise le vecteur aléatoire suivant la consigne :
+```{python}
+essais = 100
+mx1,vx1 = 2,0.5
+mx2,vx2 = 1,0.75
+alpha = 1
+```
+
+```{python}
+X1 = rd.normal(mx1,np.sqrt(vx1),essais)
+X2 = rd.normal(mx2,np.sqrt(vx2),essais)
+X = np.matrix([X1,X2])
+```
+
+## Calcul du vecteur moyenne et de la matrice de covariance
+
+on calcule la matrice de covariance et la moyenne du vecteur.
+```{python}
+
+mx = X.mean(1)
+Cx = np.cov(X)
+
+print("mean:",mx)
+print("cov:",Cx)
+
+
+```
+
+## Interprétation 
+
+La moyenne est proche des moyennes définies dans le calcul des gaussiennes : (2,1).
+Les variances sont proches de la théorique : (0.5,0.75).
+Enfin la covariance entre X1 et X2 est proche de 0, ce qui est logique puisque les deux variables (X1 et X2) sont théoriquement indépendantes (X1 n'apparait pas dans le calcul de X2 et inversement).
+```{=typst}
+#pagebreak()
+```
+## Corrélation $X_2 = X_1 +\alpha B$
+
+Ici, on redéfini X2 pour une liste de alpha compris entre 0 et 20. Aussi X2 dépend de la variable X1.
+
+```{python}
+
+
+X1 = rd.normal(mx1,np.sqrt(vx1),essais)
+
+corListe = []
+
+arange = np.arange(0,20,0.1)
+
+for alpha in arange:
+  X2 = X1 + alpha * rd.normal(mx2,np.sqrt(vx2),essais)
+  X = np.matrix([X1,X2])
+
+  mx = X.mean(1)
+  Cx = np.cov(X)
+  cor = np.corrcoef(X1,X2)
+
+  corListe.append(cor[0][1])
+```
+
+```{python}
+#| fig-cap: "Affichage de la corrélation en fonction de alpha"
+
+plt.figure(8)
+plt.plot(arange,corListe)
+plt.show()
+```
+On constate qu'à alpha = 0, X1 et X2 sont corrélés, ce qui parait logique puisque X1=X2 à cette alpha précis.
+
+A alpha > 10, X1 et X2 sont décorrélés partiellement voir totalement. Dans ce cas là, c'est la $\alpha B$ qui prend le dessus sur X1 et redonne un certain caractère d'indépendance (l'indépendance d'une loi gaussienne est équivalente à être décorrélé,  car c'est **gaussien**).
+
+# Conclusion
+
+Nous pouvons dire qu'il est possible informatiquement de simuler et d'approximer l'Espérance et la Variance d'une variable aléatoire. Aussi nous pouvons aussi dire la même chose sur un vecteur aléatoire. 

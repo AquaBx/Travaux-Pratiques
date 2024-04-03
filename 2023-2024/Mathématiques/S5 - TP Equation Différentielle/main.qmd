@@ -1,0 +1,901 @@
+---
+title: "Compte-rendu TP Équations Différentielles"
+format: 
+  typst:
+    toc: true
+    section-numbering: "1.a :"
+    author: Tom Chauvel
+    keep-typ: true
+
+render-on-save: true
+
+engine: jupyter
+jupyter: python3
+---
+
+
+```{=typst}
+#pagebreak();
+```
+
+Dans ce TP nous allons voir comment manipuler les équations différentielles, en particulier comment les approximer numériquement avec la méthode d'Euler et celle de Runge-Kutta.
+
+# Partie 1
+
+## Complétion du fichier
+
+```{python}
+import numpy as np
+from matplotlib import pyplot as plt
+```
+``` python
+tmax = 20  # durée simulation
+pas = 0.5 # pas d'Euler
+time=np.arange(0, tmax, pas) # Discrétisation
+
+#--------Courbe réelle---------
+x_th=np.zeros(len(time))
+x_th=np.exp(-time) #solution théorique
+#--------------------
+x0 = 1 #condition initiale
+x = np.zeros(len(x_th))
+f1 = np.zeros(len(x_th))
+#------------simul Euler-------------------------
+for i in range(len(time)):
+    if i==0: #vérification condition initiale
+        x[i]=x0
+    else:
+        f1 = -x[i-1]
+        x[i]=x[i-1]+pas*f1
+#--------------------------------
+plt.figure()
+#---------visu ---------
+plt.plot(time  ,x_th, label='Theoric')
+plt.plot(time  ,x,'-..', label='Euler')
+plt.xlabel ('temps')
+plt.ylabel('x(t)')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+```{=typst}
+
+#pagebreak()
+```
+
+## Etude de l’influence du pas de simulation 𝛼
+
+``` {python}
+#| fig-cap: "cas 𝛼=0.2"
+#| echo : false
+
+tmax = 20  # durée simulation
+pas = 0.2 # pas d'Euler
+time=np.arange(0, tmax, pas) # Discrétisation
+
+#--------Courbe réelle---------
+x_th=np.zeros(len(time))
+x_th=np.exp(-time) #solution théorique
+#--------------------
+x0 = 1 #condition initiale
+x = np.zeros(len(x_th))
+f1 = np.zeros(len(x_th))
+#------------simul Euler-------------------------
+for i in range(len(time)):
+    if i==0: #vérification condition initiale
+        x[i]=x0
+    else:
+        f1 = -x[i-1]
+        x[i]=x[i-1]+pas*f1
+#--------------------------------
+plt.figure()
+#---------visu ---------
+plt.plot(time  ,x_th, label='Theoric')
+plt.plot(time  ,x,'-..', label='Euler')
+plt.xlabel ('temps')
+plt.ylabel('x(t)')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+
+``` {python}
+#| fig-cap: "cas 𝛼=0.5"
+#| echo : false
+
+tmax = 20  # durée simulation
+pas = 0.5 # pas d'Euler
+time=np.arange(0, tmax, pas) # Discrétisation
+
+#--------Courbe réelle---------
+x_th=np.zeros(len(time))
+x_th=np.exp(-time) #solution théorique
+#--------------------
+x0 = 1 #condition initiale
+x = np.zeros(len(x_th))
+f1 = np.zeros(len(x_th))
+#------------simul Euler-------------------------
+for i in range(len(time)):
+    if i==0: #vérification condition initiale
+        x[i]=x0
+    else:
+        f1 = -x[i-1]
+        x[i]=x[i-1]+pas*f1
+#--------------------------------
+plt.figure()
+#---------visu ---------
+plt.plot(time  ,x_th, label='Theoric')
+plt.plot(time  ,x,'-..', label='Euler')
+plt.xlabel ('temps')
+plt.ylabel('x(t)')
+plt.grid()
+plt.legend()
+plt.show()
+```
+``` {python}
+#| fig-cap: "cas 𝛼=0.8"
+#| echo : false
+
+tmax = 20  # durée simulation
+pas = 0.8 # pas d'Euler
+time=np.arange(0, tmax, pas) # Discrétisation
+
+#--------Courbe réelle---------
+x_th=np.zeros(len(time))
+x_th=np.exp(-time) #solution théorique
+#--------------------
+x0 = 1 #condition initiale
+x = np.zeros(len(x_th))
+f1 = np.zeros(len(x_th))
+#------------simul Euler-------------------------
+for i in range(len(time)):
+    if i==0: #vérification condition initiale
+        x[i]=x0
+    else:
+        f1 = -x[i-1]
+        x[i]=x[i-1]+pas*f1
+#--------------------------------
+plt.figure()
+#---------visu ---------
+plt.plot(time  ,x_th, label='Theoric')
+plt.plot(time  ,x,'-..', label='Euler')
+plt.xlabel ('temps')
+plt.ylabel('x(t)')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+En changeant le pas, la solution est approché plus ou moins précisement. En l'occurence, plus le pas est petit plus on est précis.
+
+```{=typst}
+#pagebreak()
+```
+
+## Programmation de la méthode de Runge-Kutta d’ordre 2
+
+```python
+tmax = 20  # durée simulation
+pas = 0.5 # pas d'Euler
+time=np.arange(0, tmax, pas) # Discrétisation
+
+#--------Courbe réelle---------
+x_th=np.zeros(len(time))
+x_th=np.exp(-time) #solution théorique
+
+#--------------------
+x0 = 1 #condition initiale
+x = np.zeros(len(x_th))
+f1 = np.zeros(len(x_th))
+
+#------------simul Euler-------------------------
+for i in range(len(time)):
+    if i==0: #vérification condition initiale
+        x[i]=x0
+    else:
+        f1 = -x[i-1]
+        x1 = x[i-1]+pas*f1
+        f2 = -x1
+
+        x[i] = x[i-1] + pas*(f1+f2)/2
+
+#--------------------------------
+plt.figure()
+#---------visu ---------
+plt.plot(time  ,x_th, label='Theoric')
+plt.plot(time  ,x,'-..', label='Runge-Kutta')
+plt.xlabel ('temps')
+plt.ylabel('x(t)')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+```{=typst}
+#pagebreak()
+```
+
+## Comparaison des deux méthodes
+
+```{python}
+#| fig-cap: "Méthode Runge-Kutta cas 𝛼=0.2"
+#| echo : false
+
+tmax = 20  # durée simulation
+pas = 0.2 # pas d'Euler
+time=np.arange(0, tmax, pas) # Discrétisation
+
+#--------Courbe réelle---------
+x_th=np.zeros(len(time))
+x_th=np.exp(-time) #solution théorique
+
+#--------------------
+x0 = 1 #condition initiale
+x = np.zeros(len(x_th))
+f1 = np.zeros(len(x_th))
+
+#------------simul Euler-------------------------
+for i in range(len(time)):
+    if i==0: #vérification condition initiale
+        x[i]=x0
+    else:
+        f1 = -x[i-1]
+        x1 = x[i-1]+pas*f1
+        f2 = -x1
+
+        x[i] = x[i-1] + pas*(f1+f2)/2
+
+#--------------------------------
+plt.figure()
+#---------visu ---------
+plt.plot(time  ,x_th, label='Theoric')
+plt.plot(time  ,x,'-..', label='Runge-Kutta')
+plt.xlabel ('temps')
+plt.ylabel('x(t)')
+plt.grid()
+plt.legend()
+plt.show()
+```
+```{python}
+#| fig-cap: "Méthode Runge-Kutta cas 𝛼=0.5"
+#| echo : false
+
+tmax = 20  # durée simulation
+pas = 0.5 # pas d'Euler
+time=np.arange(0, tmax, pas) # Discrétisation
+
+#--------Courbe réelle---------
+x_th=np.zeros(len(time))
+x_th=np.exp(-time) #solution théorique
+
+#--------------------
+x0 = 1 #condition initiale
+x = np.zeros(len(x_th))
+f1 = np.zeros(len(x_th))
+
+#------------simul Euler-------------------------
+for i in range(len(time)):
+    if i==0: #vérification condition initiale
+        x[i]=x0
+    else:
+        f1 = -x[i-1]
+        x1 = x[i-1]+pas*f1
+        f2 = -x1
+
+        x[i] = x[i-1] + pas*(f1+f2)/2
+
+#--------------------------------
+plt.figure()
+#---------visu ---------
+plt.plot(time  ,x_th, label='Theoric')
+plt.plot(time  ,x,'-..', label='Runge-Kutta')
+plt.xlabel ('temps')
+plt.ylabel('x(t)')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+```{python}
+#| fig-cap: "Méthode Runge-Kutta cas 𝛼=0.8"
+#| echo : false
+
+tmax = 20  # durée simulation
+pas = 0.8 # pas d'Euler
+time=np.arange(0, tmax, pas) # Discrétisation
+
+#--------Courbe réelle---------
+x_th=np.zeros(len(time))
+x_th=np.exp(-time) #solution théorique
+
+#--------------------
+x0 = 1 #condition initiale
+x = np.zeros(len(x_th))
+f1 = np.zeros(len(x_th))
+
+#------------simul Euler-------------------------
+for i in range(len(time)):
+    if i==0: #vérification condition initiale
+        x[i]=x0
+    else:
+        f1 = -x[i-1]
+        x1 = x[i-1]+pas*f1
+        f2 = -x1
+
+        x[i] = x[i-1] + pas*(f1+f2)/2
+
+#--------------------------------
+plt.figure()
+#---------visu ---------
+plt.plot(time  ,x_th, label='Theoric')
+plt.plot(time  ,x,'-..', label='Runge-Kutta')
+plt.xlabel ('temps')
+plt.ylabel('x(t)')
+plt.grid()
+plt.legend()
+plt.show()
+```
+
+On remarque qu'à pas égal, Runge-Kutta est plus précis. De plus, à l'inverse de la méthode de Euler qui se rapproche via le bas, le rapprochement de la courbe vient du haut.
+
+
+```{=typst}
+#pagebreak()
+```
+
+# Partie 2
+
+## Analyse
+
+ℎ𝑅(𝑡)     : renard isolé / renard qui vont disparaitre 
+𝑏𝑅(𝑡)𝐿(𝑡) : renard qui ont de quoi se nourrir et qui vont survivre
+
+𝑎𝐿(𝑡)     : lapin qui n'ont pas croisé de renard et qui vont survivre
+𝑐𝑅(𝑡)𝐿(𝑡) : lapin qui ont croisé un renard et qui vont mourir
+
+```{=typst}
+#pagebreak()
+```
+
+## Codage Méthode Euler
+```python
+#--Simul modèle Lotka-Voltterra--------------
+
+a= 0.4 # taux de croissance proies en absence prédateurs
+h= 0.4 # taux décès prédateurs en l'absence de proies
+b= 0.01 # influence prédateurs sur proies
+c= 0.01 # influence proies sur prédateurs
+
+
+tmax = 40  # durée simulation
+pas = 0.2             # pas d'Euler
+nmax=round(tmax/pas) # nombre échantillons simulés
+#--------initialisations---------
+R=np.zeros(nmax)
+L=np.zeros(nmax)
+
+L[0]=80 #Initialisation Lapins
+R[0]=12 #Initialisation Renards
+
+#------------simul Euler-------------------------
+for i in range(nmax-1):
+    f1 = -c*R[i]*L[i] + a * L[i]
+    f2 = - h * R[i] + b*R[i]*L[i]
+    L[i+1]=L[i]+pas*f1
+    R[i+1]=R[i]+pas*f2
+
+#--------------------------------
+plt.figure()
+time = np.arange(nmax)
+plt.subplot (2,1,1)
+#---------visu Nbre Gentils (proies)---------
+plt.plot(time  ,L)
+plt.title("algo")
+limit1 = plt.axis()
+plt.xlabel('temps')
+plt.ylabel('Nbre de proies')
+plt.grid()
+
+plt.legend('Proies')
+#---------visu Nbre Méchants (prédateurs)--------
+plt.subplot(2,1,2)
+plt.plot(time  ,R,'-..')
+plt.xlabel('temps')
+plt.ylabel('Nbre de Prédateurs')
+plt.grid()
+plt.legend('Prédateurs')
+
+plt.show()
+```
+
+
+
+```{python}
+#| fig-cap: "Méthode Euler cas pas=0.1"
+#| echo : false
+
+#--Simul modèle Lotka-Voltterra--------------
+
+a= 0.4 # taux de croissance proies en absence prédateurs
+h= 0.4 # taux décès prédateurs en l'absence de proies
+b= 0.01 # influence prédateurs sur proies
+c= 0.01 # influence proies sur prédateurs
+
+
+tmax = 40  # durée simulation
+pas = 0.1             # pas d'Euler
+nmax=round(tmax/pas) # nombre échantillons simulés
+#--------initialisations---------
+R=np.zeros(nmax)
+L=np.zeros(nmax)
+
+L[0]=80 #Initialisation Lapins
+R[0]=12 #Initialisation Renards
+
+#------------simul Euler-------------------------
+for i in range(nmax-1):
+    f1 = -c*R[i]*L[i] + a * L[i]
+    f2 = - h * R[i] + b*R[i]*L[i]
+    L[i+1]=L[i]+pas*f1
+    R[i+1]=R[i]+pas*f2
+
+#--------------------------------
+plt.figure()
+time = np.arange(nmax)
+plt.subplot (2,1,1)
+#---------visu Nbre Gentils (proies)---------
+plt.plot(time  ,L)
+plt.title("algo")
+limit1 = plt.axis()
+plt.xlabel('temps')
+plt.ylabel('Nbre de proies')
+plt.grid()
+
+plt.legend('Proies')
+#---------visu Nbre Méchants (prédateurs)--------
+plt.subplot(2,1,2)
+plt.plot(time  ,R,'-..')
+plt.xlabel('temps')
+plt.ylabel('Nbre de Prédateurs')
+plt.grid()
+plt.legend('Prédateurs')
+
+plt.show()
+```
+
+
+```{python}
+#| fig-cap: "Méthode Euler cas pas=0.3"
+#| echo : false
+
+#--Simul modèle Lotka-Voltterra--------------
+
+a= 0.4 # taux de croissance proies en absence prédateurs
+h= 0.4 # taux décès prédateurs en l'absence de proies
+b= 0.01 # influence prédateurs sur proies
+c= 0.01 # influence proies sur prédateurs
+
+
+tmax = 40  # durée simulation
+pas = 0.3             # pas d'Euler
+nmax=round(tmax/pas) # nombre échantillons simulés
+#--------initialisations---------
+R=np.zeros(nmax)
+L=np.zeros(nmax)
+
+L[0]=80 #Initialisation Lapins
+R[0]=12 #Initialisation Renards
+
+#------------simul Euler-------------------------
+for i in range(nmax-1):
+    f1 = -c*R[i]*L[i] + a * L[i]
+    f2 = - h * R[i] + b*R[i]*L[i]
+    L[i+1]=L[i]+pas*f1
+    R[i+1]=R[i]+pas*f2
+
+#--------------------------------
+plt.figure()
+time = np.arange(nmax)
+plt.subplot (2,1,1)
+#---------visu Nbre Gentils (proies)---------
+plt.plot(time  ,L)
+plt.title("algo")
+limit1 = plt.axis()
+plt.xlabel('temps')
+plt.ylabel('Nbre de proies')
+plt.grid()
+
+plt.legend('Proies')
+#---------visu Nbre Méchants (prédateurs)--------
+plt.subplot(2,1,2)
+plt.plot(time  ,R,'-..')
+plt.xlabel('temps')
+plt.ylabel('Nbre de Prédateurs')
+plt.grid()
+plt.legend('Prédateurs')
+
+plt.show()
+```
+
+
+
+```{python}
+#| fig-cap: "Méthode Euler cas pas=0.4"
+#| echo : false
+
+#--Simul modèle Lotka-Voltterra--------------
+
+a= 0.4 # taux de croissance proies en absence prédateurs
+h= 0.4 # taux décès prédateurs en l'absence de proies
+b= 0.01 # influence prédateurs sur proies
+c= 0.01 # influence proies sur prédateurs
+
+
+tmax = 40  # durée simulation
+pas = 0.4             # pas d'Euler
+nmax=round(tmax/pas) # nombre échantillons simulés
+#--------initialisations---------
+R=np.zeros(nmax)
+L=np.zeros(nmax)
+
+L[0]=80 #Initialisation Lapins
+R[0]=12 #Initialisation Renards
+
+#------------simul Euler-------------------------
+for i in range(nmax-1):
+    f1 = -c*R[i]*L[i] + a * L[i]
+    f2 = - h * R[i] + b*R[i]*L[i]
+    L[i+1]=L[i]+pas*f1
+    R[i+1]=R[i]+pas*f2
+
+#--------------------------------
+plt.figure()
+time = np.arange(nmax)
+plt.subplot (2,1,1)
+#---------visu Nbre Gentils (proies)---------
+plt.plot(time  ,L)
+plt.title("algo")
+limit1 = plt.axis()
+plt.xlabel('temps')
+plt.ylabel('Nbre de proies')
+plt.grid()
+
+plt.legend('Proies')
+#---------visu Nbre Méchants (prédateurs)--------
+plt.subplot(2,1,2)
+plt.plot(time  ,R,'-..')
+plt.xlabel('temps')
+plt.ylabel('Nbre de Prédateurs')
+plt.grid()
+plt.legend('Prédateurs')
+
+plt.show()
+```
+
+
+
+```{python}
+#| fig-cap: "Méthode Euler cas pas=0.5"
+#| echo : false
+
+#--Simul modèle Lotka-Voltterra--------------
+
+a= 0.4 # taux de croissance proies en absence prédateurs
+h= 0.4 # taux décès prédateurs en l'absence de proies
+b= 0.01 # influence prédateurs sur proies
+c= 0.01 # influence proies sur prédateurs
+
+
+tmax = 40  # durée simulation
+pas = 0.5             # pas d'Euler
+nmax=round(tmax/pas) # nombre échantillons simulés
+#--------initialisations---------
+R=np.zeros(nmax)
+L=np.zeros(nmax)
+
+L[0]=80 #Initialisation Lapins
+R[0]=12 #Initialisation Renards
+
+#------------simul Euler-------------------------
+for i in range(nmax-1):
+    f1 = -c*R[i]*L[i] + a * L[i]
+    f2 = - h * R[i] + b*R[i]*L[i]
+    L[i+1]=L[i]+pas*f1
+    R[i+1]=R[i]+pas*f2
+
+#--------------------------------
+plt.figure()
+time = np.arange(nmax)
+plt.subplot (2,1,1)
+#---------visu Nbre Gentils (proies)---------
+plt.plot(time  ,L)
+plt.title("algo")
+limit1 = plt.axis()
+plt.xlabel('temps')
+plt.ylabel('Nbre de proies')
+plt.grid()
+
+plt.legend('Proies')
+#---------visu Nbre Méchants (prédateurs)--------
+plt.subplot(2,1,2)
+plt.plot(time  ,R,'-..')
+plt.xlabel('temps')
+plt.ylabel('Nbre de Prédateurs')
+plt.grid()
+plt.legend('Prédateurs')
+
+plt.show()
+```
+
+Plus le pas augmente plus la courbe perd des détail et deviens de plus en plus fausse, surtout à partir de 0.5.
+
+```{=typst}
+#pagebreak()
+```
+
+## Codage Runge-Kutta
+
+```python
+
+#--Simul modèle Lotka-Voltterra--------------
+
+a= 0.4 # taux de croissance proies en absence prédateurs
+h= 0.4 # taux décès prédateurs en l'absence de proies
+b= 0.01 # influence prédateurs sur proies
+c= 0.01 # influence proies sur prédateurs
+
+
+tmax = 40  # durée simulation
+pas = 0.5             # pas d'Euler
+nmax=round(tmax/pas) # nombre échantillons simulés
+#--------initialisations---------
+R=np.zeros(nmax)
+L=np.zeros(nmax)
+
+L[0]=80 #Initialisation Lapins
+R[0]=12 #Initialisation Renards
+
+#------------simul Euler-------------------------
+for i in range(nmax-1):
+    
+    r1 = R[i]
+    l1 = L[i]
+
+    fl1 = - c * r1 * l1 + a * l1
+    fr1 = - h * r1 + b * r1 * l1
+
+    l2=l1+pas*fl1
+    r2=r1+pas*fr1
+
+    fl2 = - c * r2 * l2 + a * l2
+    fr2 = - h * r2 + b * r2 * l2
+
+    L[i+1]=L[i]+pas*(fl1+fl2)/2
+    R[i+1]=R[i]+pas*(fr1+fr2)/2
+
+#--------------------------------
+plt.figure()
+time = np.arange(nmax)
+plt.subplot (2,1,1)
+#---------visu Nbre Gentils (proies)---------
+plt.plot(time  ,L)
+plt.title("algo")
+limit1 = plt.axis()
+plt.xlabel('temps')
+plt.ylabel('Nbre de proies')
+plt.grid()
+
+plt.legend('Proies')
+#---------visu Nbre Méchants (prédateurs)--------
+plt.subplot(2,1,2)
+plt.plot(time  ,R,'-..')
+plt.xlabel('temps')
+plt.ylabel('Nbre de Prédateurs')
+plt.grid()
+plt.legend('Prédateurs')
+
+plt.show()
+```
+
+
+```{python}
+#| fig-cap: "Méthode Runge-Kutta cas pas=0.5"
+#| echo : false
+
+#--Simul modèle Lotka-Voltterra--------------
+
+a= 0.4 # taux de croissance proies en absence prédateurs
+h= 0.4 # taux décès prédateurs en l'absence de proies
+b= 0.01 # influence prédateurs sur proies
+c= 0.01 # influence proies sur prédateurs
+
+
+tmax = 40  # durée simulation
+pas = 0.5             # pas d'Euler
+nmax=round(tmax/pas) # nombre échantillons simulés
+#--------initialisations---------
+R=np.zeros(nmax)
+L=np.zeros(nmax)
+
+L[0]=80 #Initialisation Lapins
+R[0]=12 #Initialisation Renards
+
+#------------simul Euler-------------------------
+for i in range(nmax-1):
+    
+    r1 = R[i]
+    l1 = L[i]
+
+    fl1 = - c * r1 * l1 + a * l1
+    fr1 = - h * r1 + b * r1 * l1
+
+    l2=l1+pas*fl1
+    r2=r1+pas*fr1
+
+    fl2 = - c * r2 * l2 + a * l2
+    fr2 = - h * r2 + b * r2 * l2
+
+    L[i+1]=L[i]+pas*(fl1+fl2)/2
+    R[i+1]=R[i]+pas*(fr1+fr2)/2
+
+#--------------------------------
+plt.figure()
+time = np.arange(nmax)
+plt.subplot (2,1,1)
+#---------visu Nbre Gentils (proies)---------
+plt.plot(time  ,L)
+plt.title("algo")
+limit1 = plt.axis()
+plt.xlabel('temps')
+plt.ylabel('Nbre de proies')
+plt.grid()
+
+plt.legend('Proies')
+#---------visu Nbre Méchants (prédateurs)--------
+plt.subplot(2,1,2)
+plt.plot(time  ,R,'-..')
+plt.xlabel('temps')
+plt.ylabel('Nbre de Prédateurs')
+plt.grid()
+plt.legend('Prédateurs')
+
+plt.show()
+```
+
+
+```{python}
+#| fig-cap: "Méthode Runge-Kutta cas pas=0.6"
+#| echo : false
+
+#--Simul modèle Lotka-Voltterra--------------
+
+a= 0.4 # taux de croissance proies en absence prédateurs
+h= 0.4 # taux décès prédateurs en l'absence de proies
+b= 0.01 # influence prédateurs sur proies
+c= 0.01 # influence proies sur prédateurs
+
+
+tmax = 40  # durée simulation
+pas = 0.6             # pas d'Euler
+nmax=round(tmax/pas) # nombre échantillons simulés
+#--------initialisations---------
+R=np.zeros(nmax)
+L=np.zeros(nmax)
+
+L[0]=80 #Initialisation Lapins
+R[0]=12 #Initialisation Renards
+
+#------------simul Euler-------------------------
+for i in range(nmax-1):
+    
+    r1 = R[i]
+    l1 = L[i]
+
+    fl1 = - c * r1 * l1 + a * l1
+    fr1 = - h * r1 + b * r1 * l1
+
+    l2=l1+pas*fl1
+    r2=r1+pas*fr1
+
+    fl2 = - c * r2 * l2 + a * l2
+    fr2 = - h * r2 + b * r2 * l2
+
+    L[i+1]=L[i]+pas*(fl1+fl2)/2
+    R[i+1]=R[i]+pas*(fr1+fr2)/2
+
+#--------------------------------
+plt.figure()
+time = np.arange(nmax)
+plt.subplot (2,1,1)
+#---------visu Nbre Gentils (proies)---------
+plt.plot(time  ,L)
+plt.title("algo")
+limit1 = plt.axis()
+plt.xlabel('temps')
+plt.ylabel('Nbre de proies')
+plt.grid()
+
+plt.legend('Proies')
+#---------visu Nbre Méchants (prédateurs)--------
+plt.subplot(2,1,2)
+plt.plot(time  ,R,'-..')
+plt.xlabel('temps')
+plt.ylabel('Nbre de Prédateurs')
+plt.grid()
+plt.legend('Prédateurs')
+
+plt.show()
+```
+
+
+```{python}
+#| fig-cap: "Méthode Runge-Kutta cas pas=0.7"
+#| echo : false
+
+#--Simul modèle Lotka-Voltterra--------------
+
+a= 0.4 # taux de croissance proies en absence prédateurs
+h= 0.4 # taux décès prédateurs en l'absence de proies
+b= 0.01 # influence prédateurs sur proies
+c= 0.01 # influence proies sur prédateurs
+
+
+tmax = 40  # durée simulation
+pas = 0.7             # pas d'Euler
+nmax=round(tmax/pas) # nombre échantillons simulés
+#--------initialisations---------
+R=np.zeros(nmax)
+L=np.zeros(nmax)
+
+L[0]=80 #Initialisation Lapins
+R[0]=12 #Initialisation Renards
+
+#------------simul Euler-------------------------
+for i in range(nmax-1):
+    
+    r1 = R[i]
+    l1 = L[i]
+
+    fl1 = - c * r1 * l1 + a * l1
+    fr1 = - h * r1 + b * r1 * l1
+
+    l2=l1+pas*fl1
+    r2=r1+pas*fr1
+
+    fl2 = - c * r2 * l2 + a * l2
+    fr2 = - h * r2 + b * r2 * l2
+
+    L[i+1]=L[i]+pas*(fl1+fl2)/2
+    R[i+1]=R[i]+pas*(fr1+fr2)/2
+
+#--------------------------------
+plt.figure()
+time = np.arange(nmax)
+plt.subplot (2,1,1)
+#---------visu Nbre Gentils (proies)---------
+plt.plot(time  ,L)
+plt.title("algo")
+limit1 = plt.axis()
+plt.xlabel('temps')
+plt.ylabel('Nbre de proies')
+plt.grid()
+
+plt.legend('Proies')
+#---------visu Nbre Méchants (prédateurs)--------
+plt.subplot(2,1,2)
+plt.plot(time  ,R,'-..')
+plt.xlabel('temps')
+plt.ylabel('Nbre de Prédateurs')
+plt.grid()
+plt.legend('Prédateurs')
+
+plt.show()
+```
+
+On remarque qu'aucun changement majeur n'apparait sur les courbes, et même que les résultats sont meilleurs qu'avec la méthode d'Euler.
+
+# Conclusion
+
+Ce TP a pu nous familiariser aux méthodes d'analyse numérique des équations différentielles. Nous avons pu constater que la méthode de Runge-Kutta est bien souvent plus qualitative à un pas donné et perd moins de détail avec un pas de plus en plus grand. 

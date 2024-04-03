@@ -1,0 +1,193 @@
+---
+title: "Compte-rendu TP sur l'intégration numérique"
+format: 
+  typst:
+    toc: true
+    section-numbering: "1.a :"
+    author: Tom Chauvel et Vianney Hervé
+    keep-typ: true
+
+render-on-save: true
+
+engine: jupyter
+jupyter: python3
+---
+
+
+```{=typst}
+#pagebreak();
+
+= Introduction
+
+Dans ce TP, nous allons montrer grâce à la méthode numérique que $integral_a^b |f(x)| d x$ diverge lorsque $b$ tends vers $+infinity$, ou $f$ est notre fonction à étudier.
+
+= Partie 1
+
+Dans cette partie, nous allons implémenter la méthode des rectangles à gauche pour calculer les intégrales. 
+
+== Méthode Rectangle à gauche
+
+Tout d'abord, nous importons les modules numpy et matplotlib, ils vont s'avérer très pratiques pour calculer et afficher nos résultats :
+
+```
+```{python}
+import numpy as np
+from matplotlib import pyplot as plt
+```
+
+```{=typst}
+
+Ici, nous définissons la fonction IntRecG prenant trois paramètres :
+- a : la borne inférieur
+- b : la borne supérieur
+- n : le nombre de points 
+
+```
+
+```{python}
+IntRecG = lambda f,a,b,n : (b-a)/(n-1)*sum(x for x in f[:-1])
+```
+
+```{=typst}
+
+=== Validation grâce à la fonction $exp$
+
+Nous allons maintenant mesurer l'efficacité de la méthode des rectangles à gauche en utilisant une fonction dont nous pouvons calculer une primitive.
+Prenons la fonction $e^(-x)$. L'intégrale sur l'interval $[a, b]$ est donc $e^(-a) - e^(-b)$.
+
+Posons les conditions initiales de notre mesure :
+- l'interval d'étude sera $[0, 5]$
+- on veut $1000$ subdivisions de l'interval
+
+```
+
+```{python}
+a=0
+b=5
+n = 1000
+```
+
+```{python}
+int_inv_theo = lambda a,b : np.exp(-a) - np.exp(-b)
+
+f = np.exp(-np.arange(a,b,(b-a)/(n-1)))
+```
+
+
+```{=typst}
+Ici ``int_inv_theo`` représente la valeur théorique de l'intervalle et ``f`` les valeurs prises par la fonction $e^(-x)$ sur $[a,b]$
+
+#pagebreak()
+
+Nous obtenons comme résultats :
+```
+
+```{python}
+print("Théorique : ",int_inv_theo(a,b))
+print("Rectangle : ",IntRecG(f,a,b,n))
+```
+
+
+```{=typst}
+Le résultat estimé est très correct puisqu'il est très proche de la véritable intégrale.
+
+#pagebreak()
+
+=== Evaluation de l'impact du nombre de rectangles
+
+Nous allons maintenant étudier l'impact du nombre de rectangles $n$ sur le résultat de l'intégrale numérique.
+
+```
+
+```{python}
+
+abscisse = np.arange(10,3000,10)
+ordonnee = []
+
+for n in abscisse : 
+    f = np.exp(-np.arange(a,b,(b-a)/(n-1)))
+
+    ordonnee.append( np.abs( int_inv_theo(a,b) - IntRecG(f,a,b,n) ) )
+
+plt.figure()
+
+plt.plot(abscisse, ordonnee)
+plt.xlabel("nombre de rectangles")
+plt.ylabel("erreur relative de l'estmation")
+
+plt.show()
+
+```
+
+```{=typst}
+
+Nous observons clairement que plus il y a de rectangles, plus l'erreur diminue.
+On estime que l'erreur est suffisamment faible lorsque $n tilde.eq 2000$.
+
+#pagebreak()
+
+=== Evaluation de l'impact de la taille de $b$
+
+Ici, nous allons voir comment l'erreur se comporte quand $b$ augmente, avec $n$ fixé.
+
+```
+
+```{python}
+
+abscisse = np.arange(5,1000,1)
+ordonnee = []
+n=2000
+
+for b in abscisse : 
+    f = np.exp(-np.arange(a,b,(b-a)/(n-1)))
+    ordonnee.append( np.abs( int_inv_theo(a,b) - IntRecG(f,a,b,n) ) )
+
+plt.figure()
+
+plt.plot(abscisse, ordonnee)
+plt.ylabel("erreur de IntRecG pour n = 2000")
+plt.xlabel("borne supérieur b")
+
+plt.show()
+
+```
+
+```{=typst}
+L'erreur augmente linéairement quand $b$ augmente.
+
+#pagebreak()
+
+= Partie 2
+
+Ici, nous allons voir si l'intégrale absolue selon Riemann de la fonction $f : x -> sin(x)/x$ tend vers $+infinity$ quand $b$ tend vers $+infinity$.
+```
+
+```{python}
+
+abscisse = np.arange(5, 2000, 10)
+ordonnee = []
+n = 20000
+
+for b in abscisse : 
+    f = np.abs( np.sinc( np.arange(a, b, (b-a)/(n-1)) ) )
+    ordonnee.append( IntRecG(f, a, b, n) )
+
+plt.figure()
+
+plt.plot(abscisse, ordonnee)
+plt.xlabel("valeur de b")
+plt.ylabel("intégrale calculé (IntRecG)")
+
+plt.show()
+
+```
+
+```{=typst}
+
+Nous observons clairement que la valeur de l'intégrale diverge lorsque $b$ tend vers $+oo$. On en conclue donc que $f(x) = sin(x)/x$ n'est pas absolument intégrable au sens de Riemann. Par conséquent, elle n'est pas intégrable au sens de Lebesgue.
+
+= Conclusion
+
+Dans ce TP, on a pu démontrer que la fonction $f(x) = sin(x)/x$ n'est pas intégrable au sens de Lebesgue sur $[0,+infinity]$ grâce aux outils numériques.
+
+```
