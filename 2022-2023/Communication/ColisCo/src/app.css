@@ -1,0 +1,17 @@
+/* Write your global styles here, in PostCSS syntax */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Supermercado+One&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.material-icons {
+	font-family: 'Material Icons';
+}
+
+html {
+	font-family: 'Poppins', sans-serif;
+}
