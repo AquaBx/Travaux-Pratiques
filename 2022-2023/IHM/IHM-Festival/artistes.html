@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Tom Chauvel">
+        <meta name="keywords" content="festival rennes rock">
+        <link rel="icon" href="./favicon.ico"  type="image/icon">
+
+        <title>Rock’n’Rennes 2023</title>
+
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/artistes.css">
+        
+    </head>
+
+    <body>
+        <header>
+            <h1>
+                <a href="./index.html">
+                    Rock’n’Rennes
+                </a>
+            </h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./presentation.html">Présentation</a></li>
+                <li><a href="./programmation.html">Programmation</a></li>
+                <li><a href="./artiste.html">Artistes</a></li>
+                <li><a href="./billeterie.html">Billeterie</a></li>
+                <li><a href="./info.html">Infos Pratiques</a></li>
+            </ul>
+        </nav>
+
+        <main>
+            <template to="main">
+                <section class="artiste">
+                    <h1></h1>
+                    <p></p>
+                    <img alt="artiste">
+                    <iframe></iframe>
+                </section>
+            </template>
+        </main>
+        
+        <footer class="footer">
+            <p class="author">
+                <span>Tom Chauvel, Groupe 1</span>
+                <span><a href="mailto:tom.chauvel@etudiants.univ-rennes.fr">Contact</a></span>
+            </p>
+            <p>© 2023 CUPGE2</p>
+        </footer>
+
+        <script>
+
+            let artistes = [
+                {"name":"Foo Fighters","img":"./artistes/foofighters.jpg","description":"", "spotify":"7jy3rLJdDQY21OgRLCZ9sD"},
+                {"name":"Green Day","img":"./artistes/greenday.jpg","description":"", "spotify":"7oPftvlwr6VrsViSDV7fJY"},
+                {"name":"The Offspring","img":"./artistes/offspring.jpg","description":"", "spotify":"5LfGQac0EIXyAN8aUwmNAQ"},
+                {"name":"Red Hot Chili Peppers","img":"./artistes/redhot.jpg","description":"", "spotify":"0L8ExT028jH3ddEcZwqJJ5"},
+
+                {"name":"Arctic Monkeys","img":"./artistes/arcticmonkeys.jpg","description":"", "spotify":"7Ln80lUS6He07XvHI8qqHH"},
+                {"name":"Coldplay","img":"./artistes/coldplay.jpg","description":"", "spotify":"4gzpq5DPGxSnKTe4SA8HAU"},
+                {"name":"Imagine Dragons","img":"./artistes/imaginedragons.jpg","description":"", "spotify":"53XhwfbYqKCa1cC15pYq2q"},
+                {"name":"Kings of Leon","img":"./artistes/kingsofleon.jpg","description":"", "spotify":"2qk9voo8llSGYcZ6xrBzKx"},
+
+                {"name":"Linkin Park","img":"./artistes/linkingpark.jpg","description":"", "spotify":"6XyY86QOPPrYVGvF9ch6wz"},
+                {"name":"Metallica","img":"./artistes/metallica.jpg","description":"", "spotify":"2ye2Wgw4gimLv2eAKyk1NB"},
+                {"name":"Muse","img":"./artistes/muse.jpg","description":"", "spotify":"12Chz98pHFMPJEknJQMWvI"},
+                {"name":"Pearl Jam","img":"./artistes/pearljam.jpg","description":"", "spotify":"1w5Kfo2jwwIPruYS2UWh56"},
+
+                {"name":"Radiohead","img":"./artistes/radiohead.jpg","description":"","spotify":"4Z8W4fKeB5YxbusRsdQVPb"},
+                {"name":"Rammstein","img":"./artistes/rammstein.jpg","description":"","spotify":"6wWVKhxIU2cEi0K81v7HvP"},
+                {"name":"The Black Keys","img":"./artistes/theblackkeys.jpg","description":"", "spotify":"7mnBLXK823vNxN3UWB7Gfz"},
+                {"name":"The Killers","img":"./artistes/thekillers.jpg","description":"", "spotify":"0C0XlULifJtAgn6ZNCW2eu"},
+            ]
+
+            let id = window.location.search.replaceAll("%20"," ")
+            let artiste = artistes.find(el => "?" + el["name"] == id )
+            
+            let template = document.querySelectorAll("template")[0]
+            let clone = document.importNode(template.content,true)
+            clone.querySelectorAll("h1")[0].textContent  = artiste["name"]
+            clone.querySelectorAll("img")[0].src  = artiste["img"]
+            clone.querySelectorAll("iframe")[0].src  = `https://open.spotify.com/embed/artist/${artiste["spotify"]}`
+            clone.querySelectorAll("p")[0].textContent = artiste["description"]
+
+            template.parentNode.appendChild(clone)
+
+            for (template of document.querySelectorAll("template")) { template.remove() }
+
+        </script>
+        
+    </body>
+</html>

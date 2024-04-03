@@ -1,0 +1,110 @@
+
+.carousel {
+    display: flex;
+    width: 100%;
+    height: 20em;
+    margin: auto;
+  }
+
+main {
+    all:unset;
+}
+
+
+.sousmenu {
+  position: sticky;
+  top:4em;
+  overflow: auto;
+  z-index: 20;
+  font-size: 1em;
+  padding:0px;
+}
+
+.sousmenu ul {
+  justify-content: space-evenly;
+ 
+
+  gap:1rem;
+  margin: auto;
+  padding: 0px;
+  display: flex;
+  list-style-type: none;
+  width:clamp(0px,100%,50rem);
+
+}
+
+.sousmenu li {
+  background-color: var(--secondary);
+  flex:1;
+  font-variant: small-caps;
+  text-align: center;
+}
+
+.sousmenu li a {
+  padding:1em !important;
+  display: block !important;
+  color:var(--text-secondary) !important;
+}
+
+.sousmenu li:hover{
+  background-color: var(--hover);
+}
+
+.sousmenu li:active{
+  background-color: var(--action);
+}
+
+
+main >  section{
+    text-align: center;
+    width: unset;
+    font-size: 2em;
+
+    margin: unset;
+    padding:3.5em;
+}
+
+
+  .carousel > figure {
+    margin:0;
+    flex: 1;
+    transition: 0.8s;
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .carousel > figure:hover {
+    flex-grow: 4;
+  }
+  
+  .carousel > figure > img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .carousel > figure > figcaption {
+    transition: 0.3s;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    
+    margin: 0;
+    background: black;
+    color: white;
+    padding: 0.5em 0.75em;
+    white-space: nowrap;
+  }
+  
+
+
+  
+  .carousel > figure:hover > figcaption {
+    opacity: 1;
+  }
+  
+
+ 

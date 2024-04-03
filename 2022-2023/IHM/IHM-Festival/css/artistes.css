@@ -1,0 +1,16 @@
+.artiste > img, .artiste > video {
+    margin: auto;
+    display: block;
+    border-radius:12px;
+    border: none;
+    margin-top: 1em;
+    width: 100%;
+}
+
+p {
+    line-height: 2em;;
+}
+
+iframe {
+    height:352px
+}

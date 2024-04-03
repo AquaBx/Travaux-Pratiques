@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <meta name="author" content="Tom Chauvel">
+        <meta name="keywords" content="festival rennes rock">
+        <link rel="icon" href="./favicon.ico"  type="image/icon">
+
+        <title>Rock’n’Rennes 2023</title>
+
+        <link rel="stylesheet" href="./css/main.css">
+        <link rel="stylesheet" href="./css/billeterie.css">
+
+    </head>
+    <body>
+        <header>
+            <h1>
+                <a href="./index.html">
+                    Rock’n’Rennes
+                </a>
+            </h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./presentation.html">Présentation</a></li>
+                <li><a href="./programmation.html">Programmation</a></li>
+                <li><a href="./artiste.html">Artistes</a></li>
+                <li class="active"><a href="./billeterie.html">Billeterie</a></li>
+                <li><a href="./info.html">Infos Pratiques</a></li>
+            </ul>
+        </nav>
+        
+        <main>
+            <section>
+                <form>
+                    <fieldset>
+                        <legend>Informations Personnelles</legend>
+                        <div>
+
+                        <label for="name">Nom</label><br>
+                        <input id="name" type="text"><br>
+                    
+                    </div>
+                    <div>
+
+                    <label for="firstname">Prénom</label><br>
+                    <input id="firstname" type="text"><br>
+                    
+                </div>
+                <div>
+
+                    <label for="email">email</label><br>
+                    <input id="email" type="email"><br>
+                    
+                </div>
+                <div>
+                    
+                    <label for="phone">Téléphone</label><br>
+                    <input id="phone" type="tel"><br>
+                    
+                </div>
+                    <div>
+                        
+                        <label for="adresse">Adresse</label><br>
+                        <input id="adresse" type="text">
+                    </div>
+                    
+                    
+                </fieldset>
+                <fieldset>
+                    
+                    <legend>Jour réservés</legend>
+        
+                    <div>   
+                        <input type="checkbox" id="day1" name="day" value="1er juillet">
+                        <label for="day1">1er Juillet</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="day2" name="day" value="1er juillet">
+                        <label for="day2">2 Juillet</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="day3" name="day" value="1er juillet">
+                        <label for="day3">3 Juillet</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="day4" name="day" value="1er juillet">
+                        <label for="day4">4 Juillet</label>
+                    </div>
+
+
+                </fieldset>
+                <fieldset>
+
+
+                    <legend>Assurance</legend>
+                    <div>
+                        <input type="radio" name="assu" value="true" id="assuoui"> <label for="assuoui">Oui</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="assu" value="false" id="assunon"> <label for="assunon">Non</label>
+                    </div>
+
+                </fieldset>
+                <fieldset>  
+
+                    <legend>Camping</legend>
+                    <div>
+                        <input type="radio" name="camping" value="true" id="campoui">
+                        <label for="campoui">Oui</label><br>
+                    </div>
+                    <div>
+                        <input type="radio" name="camping" value="false" id="campnon">
+                        <label for="campnon">Non</label>
+                    </div>
+
+                </fieldset>
+                <fieldset>  
+
+                    <legend>Tshirt</legend>
+                    <div>
+                        <input type="radio" name="tshirt" value="true" id="tshirtoui">
+                        <label for="tshirtoui">Oui</label>
+                        
+                        <br>
+                        <br>
+                        
+                        <input type="radio" name="tshirt" value="false" id="tshirtnon">
+                        <label for="tshirtnon">Non</label>
+                        
+                        <br>
+                        <br>
+
+                   
+                        <div id="tshirttaille">
+                            
+                            <label for="taille">Quelle taille ?</label>
+                            <select  id="taille">
+                                <option>XS</option>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </fieldset>
+                
+                <input disabled type="submit">
+
+
+                </form>
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p class="author">
+                <span>Tom Chauvel, Groupe 1</span>
+                <span><a href="mailto:tom.chauvel@etudiants.univ-rennes.fr">Contact</a></span>
+            </p>
+            <p>© 2023 CUPGE2</p>
+        </footer>
+    </body>
+</html>

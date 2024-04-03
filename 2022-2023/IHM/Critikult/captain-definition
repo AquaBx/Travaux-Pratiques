@@ -1,0 +1,10 @@
+{
+    "schemaVersion": 2,
+    "dockerfileLines": [
+        "FROM php:8.2-apache",
+        "RUN docker-php-ext-install mysqli  && docker-php-ext-enable mysqli",
+        "COPY ./ /var/www/html",
+        "RUN  echo \"<?php define('SERVEUR', 'srv-captain--mysql-db');define('USER', 'root');define('PWD', 'AquaJean35*');define('DB_NAME', 'critikult'); ?>\" > /var/www/html/includes/config-bdd.php "
+        
+    ]
+ }
