@@ -1,0 +1,262 @@
+[==========] Running 14 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 14 tests from TestVecteur
+[ RUN      ] TestVecteur.q1_Constructeur2Param
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 10
+[       OK ] TestVecteur.q1_Constructeur2Param (22 ms)
+[ RUN      ] TestVecteur.q1_Constructeur1Param
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+[       OK ] TestVecteur.q1_Constructeur1Param (3 ms)
+[ RUN      ] TestVecteur.q1_Constructeur0Param
+Initialisation du vecteur
+Dimension      : 3
+Valeur de base : 0
+[       OK ] TestVecteur.q1_Constructeur0Param (1 ms)
+[ RUN      ] TestVecteur.q1_Set
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 10
+[       OK ] TestVecteur.q1_Set (2 ms)
+[ RUN      ] TestVecteur.q6_ConstructeurDeCopie
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 1
+[       OK ] TestVecteur.q6_ConstructeurDeCopie (3 ms)
+[ RUN      ] TestVecteur.q6_ConstructeurDeCopieModif
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 1
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 10
+Expected: expected[i]
+Which is: 1
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 17
+Expected: expected[i]
+Which is: 11
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 24
+Expected: expected[i]
+Which is: 21
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 38
+Expected: expected[i]
+Which is: 41
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 45
+Expected: expected[i]
+Which is: 51
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 52
+Expected: expected[i]
+Which is: 61
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 59
+Expected: expected[i]
+Which is: 71
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 66
+Expected: expected[i]
+Which is: 81
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 73
+Expected: expected[i]
+Which is: 91
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 80
+Expected: expected[i]
+Which is: 101
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 87
+Expected: expected[i]
+Which is: 111
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 94
+Expected: expected[i]
+Which is: 121
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 101
+Expected: expected[i]
+Which is: 131
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 108
+Expected: expected[i]
+Which is: 141
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 10
+Expected: expected[i]
+Which is: 1
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 17
+Expected: expected[i]
+Which is: 11
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 24
+Expected: expected[i]
+Which is: 21
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 38
+Expected: expected[i]
+Which is: 41
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 45
+Expected: expected[i]
+Which is: 51
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 52
+Expected: expected[i]
+Which is: 61
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 59
+Expected: expected[i]
+Which is: 71
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 66
+Expected: expected[i]
+Which is: 81
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 73
+Expected: expected[i]
+Which is: 91
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 80
+Expected: expected[i]
+Which is: 101
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 87
+Expected: expected[i]
+Which is: 111
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 94
+Expected: expected[i]
+Which is: 121
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 101
+Expected: expected[i]
+Which is: 131
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 108
+Expected: expected[i]
+Which is: 141
+[  FAILED  ] TestVecteur.q6_ConstructeurDeCopieModif (38 ms)
+[ RUN      ] TestVecteur.q7_OperateurAffectationTailleDiminue
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+Initialisation du vecteur
+Dimension      : 7
+Valeur de base : 0
+[       OK ] TestVecteur.q7_OperateurAffectationTailleDiminue (5 ms)
+[ RUN      ] TestVecteur.q7_OperateurAffectationTailleAugmente
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+Initialisation du vecteur
+Dimension      : 7
+Valeur de base : 0
+[       OK ] TestVecteur.q7_OperateurAffectationTailleAugmente (4 ms)
+[ RUN      ] TestVecteur.q8_OperateurAdd2Vecteurs
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+[       OK ] TestVecteur.q8_OperateurAdd2Vecteurs (6 ms)
+[ RUN      ] TestVecteur.q8_OperateurAdd3Vecteurs
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+[       OK ] TestVecteur.q8_OperateurAdd3Vecteurs (5 ms)
+[ RUN      ] TestVecteur.q9_ProduitScalaire
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+[       OK ] TestVecteur.q9_ProduitScalaire (3 ms)
+[ RUN      ] TestVecteur.q10_OperateurSaisie
+Initialisation du vecteur
+Dimension      : 13
+Valeur de base : 0
+Entrez la valeur numéro 0
+Entrez la valeur numéro 1
+Entrez la valeur numéro 2
+Entrez la valeur numéro 3
+Entrez la valeur numéro 4
+Entrez la valeur numéro 5
+Entrez la valeur numéro 6
+Entrez la valeur numéro 7
+Entrez la valeur numéro 8
+Entrez la valeur numéro 9
+Entrez la valeur numéro 10
+Entrez la valeur numéro 11
+Entrez la valeur numéro 12
+[       OK ] TestVecteur.q10_OperateurSaisie (17 ms)
+[ RUN      ] TestVecteur.q11_OperateurIndexationConsultation
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+[       OK ] TestVecteur.q11_OperateurIndexationConsultation (1 ms)
+[ RUN      ] TestVecteur.q11_OperateurIndexationModification
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+[       OK ] TestVecteur.q11_OperateurIndexationModification (3 ms)
+[----------] 14 tests from TestVecteur (125 ms total)
+
+[----------] Global test environment tear-down
+[==========] 14 tests from 1 test case ran. (155 ms total)
+[  PASSED  ] 13 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] TestVecteur.q6_ConstructeurDeCopieModif
+
+ 1 FAILED TEST

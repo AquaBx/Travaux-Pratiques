@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://du8pntkkwrd0x"
+
+[deps]
+
+files=["res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.country.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.year.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.co2.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.consumption.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.cumulative.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.population.translation"]
+
+source_file="res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.csv"
+dest_files=["res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.country.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.year.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.co2.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.consumption.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.cumulative.translation", "res://Bureau/TD-TP/TP Sys/C/tp_10_11_12/owid-co2-data-excerpt.population.translation"]
+
+[params]
+
+compress=true
+delimiter=0

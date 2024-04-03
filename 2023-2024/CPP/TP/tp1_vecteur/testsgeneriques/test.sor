@@ -1,0 +1,104 @@
+[==========] Running 17 tests from 1 test case.
+[----------] Global test environment set-up.
+[----------] 17 tests from TestVecteur
+[ RUN      ] TestVecteur.q1_assertConstructeur
+[       OK ] TestVecteur.q1_assertConstructeur (2 ms)
+[ RUN      ] TestVecteur.q1_Constructeur2Param
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 10
+[       OK ] TestVecteur.q1_Constructeur2Param (0 ms)
+[ RUN      ] TestVecteur.q1_Constructeur1Param
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 0
+[       OK ] TestVecteur.q1_Constructeur1Param (0 ms)
+[ RUN      ] TestVecteur.q1_Constructeur0Param
+Initialisation du vecteur
+Dimension      : 3
+Valeur de base : 0
+[       OK ] TestVecteur.q1_Constructeur0Param (0 ms)
+[ RUN      ] TestVecteur.q1_Set
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 10
+[       OK ] TestVecteur.q1_Set (0 ms)
+[ RUN      ] TestVecteur.q6_ConstructeurDeCopie
+Initialisation du vecteur
+Dimension      : 15
+Valeur de base : 1
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: -9.08e-05
+Expected: expected[i]
+Which is: 1
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 3.0701e-41
+Expected: expected[i]
+Which is: 11
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 0.509713
+Expected: expected[i]
+Which is: 21
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 1.82067e+26
+Expected: expected[i]
+Which is: 31
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 7.20198e+31
+Expected: expected[i]
+Which is: 41
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 0.000901721
+Expected: expected[i]
+Which is: 51
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 6.33692e-10
+Expected: expected[i]
+Which is: 61
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 1.07807e-08
+Expected: expected[i]
+Which is: 71
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 4.20039e-05
+Expected: expected[i]
+Which is: 81
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 3.07343e+29
+Expected: expected[i]
+Which is: 91
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 7.21307e+22
+Expected: expected[i]
+Which is: 101
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 4.7291e+22
+Expected: expected[i]
+Which is: 111
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 7.20647e+31
+Expected: expected[i]
+Which is: 121
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 1.65768e+25
+Expected: expected[i]
+Which is: 131
+test_common.hh:42: Failure
+Value of: v[i]
+  Actual: 4.062e+24
+Expected: expected[i]
+Which is: 141

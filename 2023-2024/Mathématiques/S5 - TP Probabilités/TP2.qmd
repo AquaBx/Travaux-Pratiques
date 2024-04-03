@@ -1,0 +1,329 @@
+---
+title: "Compte Rendu TP 2 Probabilités"
+format: 
+  typst:
+    toc: true
+    section-numbering: "1.1.1 :"
+    author: Tom Chauvel
+    keep-typ: true
+
+render-on-save: true
+
+engine: jupyter
+jupyter: python3
+---
+
+
+
+```{=typst} 
+#let cell = rect.with(  inset: 8pt,  width: 100% );
+#set par(justify: true);
+
+
+#pagebreak()
+```
+# Introduction
+
+Dans ce TP, nous allons implémenter la création de Variable aléatoire de façon numérique. Ces variables aléatoires suivront une loi continu et non uniforme.
+
+# Vérification que V = 1 - U suit une loi uniforme
+
+```{=typst}
+
+Considérons U, une variable aléatoire suivant une loi uniforme sur [0,1].
+
+On a donc $ f_U(x) = u $
+
+et $ F_U(u) = P(U <= u) = u $
+
+On pose maintenant $V=1-U$ définit sur [0,1]
+
+On a donc $ f_V(v) = P(V <= v) = P( 1 - U <= v) = P( 1 - v <= U ) = 1 - P(U <= 1-v )$
+
+on sait que $P(U <= u) = u$, d'où $P(U <= 1-v) = 1-v$
+
+On a alors $ F_V(v) = 1-(1-v) = v $
+
+Or comme on sait que V est défini sur [0,1], on sait aussi que $F_V(v)$ pour $v<0$ est égale à 0 et que $F_V(v)$ pour $v>1$ est égale à 1
+
+Donc $V=1-U$ (ou $U_1$ dans l'énoncé) suit une loi uniforme sur l'intervalle [0,1].
+
+On pourrait alors simplifier $x = −1/alpha log (1 − u) = −1/alpha log(v)$
+
+```
+
+```{=typst} 
+#pagebreak()
+```
+
+# Mise en application
+
+Dans cette partie nous allons simuler les variables aléatoires de manière numérique.
+
+Pour ce faire, on aura donc besoin de numpy et matplotlib
+```{python}
+
+import numpy as np
+import numpy.random as rd
+import matplotlib.pyplot as plt
+```
+
+## Application à une loi exponentielle
+
+Pour cette variable aléatoire, on nous donnes : 
+
+```{=typst}
+$p(x) = alpha e^(−alpha x) 1_[0,+infinity[$(x)
+
+$F(x) = 1 - e^(−alpha x) 1_[0,+infinity[$(x)
+
+$F^(-1)(x) = −1/alpha log (1 − x) 1_[0,+infinity[$(x)
+
+on définit les variables
+```
+
+
+
+```{python}
+al = 2 # notre alpha
+a = 0  # borne inférieur
+b = 2  # borne supérieur
+essai = 10000
+```
+
+```{=typst}
+Ici on défini les fonctions :
+- p : densité de probabilité
+- f : fonction de répartition
+- f_inv : fonction inverse
+```
+
+```{python}
+p = lambda x : al * np.e ** (- al * x)
+f = lambda x : 1 - np.e ** (- al * x)
+f_inv = lambda u : -1/al * np.log(1-u)
+```
+
+Application des fonctions pour les afficher 
+```{python}
+x = np.arange(a,b,0.1)
+
+repartition = f(x)
+densite = p(x)
+inverse = f_inv( rd.rand(essai) )
+```
+
+```{=typst} 
+#pagebreak()
+```
+
+Dans ce code, on va afficher la densité de probabilité et la fonction de répartition précédemment calculées.
+
+```{python}
+#| fig-cap: "Affichage la densité de probabilité et la fonction de répartition"
+
+plt.figure(1)
+plt.plot(x,repartition, label='répartition théorique')
+plt.plot(x,densite, label='densité théorique')
+plt.legend(loc='best')
+plt.show()
+```
+
+```{=typst} 
+#pagebreak()
+```
+
+Ici, on va afficher la densité de probabilité théorique et l'histogramme de la densité de probabilité expérimentale déjà calculés au dessus.
+
+```{python}
+#| fig-cap: "Affichage de la densité de probabilité théorique et expérimentale"
+
+
+plt.figure(2)
+plt.plot(x,densite, label="densité théorique")
+plt.hist(inverse,x, label="densité expérimentale", density='True')
+plt.legend(loc='best')
+plt.show()
+```
+
+
+Ce qui est représenté par les deux figures semble cohérant. En effet, la fonction de densité expérimentale semble correspondre à la théorique.
+
+```{=typst} 
+#pagebreak()
+```
+
+## Application à une loi triangulaire
+
+Dans cette partie, nous allons faire la même chose, mais avec une fonction triangulaire.
+Sachant que 
+
+```{=typst}
+
+$
+p(x) = 1/alpha times (1-(|x|)/alpha) 1_([-alpha,alpha])
+$
+
+avec $alpha$ un nombre réel positif.
+
+
+```
+
+### Calcul de la fonction de répartition
+
+Comme nous n'avons pas les fonctions de répartition et son inverse, nous devons les déterminer par nous même.
+
+```{=typst} 
+$ p(x) = 1/alpha*( 1 - (|x|)/alpha ) $
+$ F(x) = integral_(-infinity)^(x) 1/alpha*( 1 - (|x|)/alpha ) dif x $
+$ F(x) = integral_(-infinity)^(x) 1/alpha - (|x|)/alpha^2 dif x $
+$ F(x) = [ x/alpha - (|x| times x)/(2alpha^2) ]_(-infinity)^(x) $
+
+p(x) est défini sur [-$alpha$,+$alpha$], d'où
+
+$ F(x) = [ x/alpha - (|x| times x)/(2alpha^2) ]_(-alpha)^(x) $
+$ F(x) = x/alpha - (|x| times x)/(2alpha^2) - ((-alpha)/alpha - (|-alpha| times (-alpha))/(2(-alpha)^2)) $
+$ F(x) = x/alpha - (|x| times x)/(2alpha^2) - (-1 - (alpha times (-alpha))/(2alpha^2)) $ 
+$ F(x) = x/alpha - (|x| times x)/(2alpha^2) - (-1 + 1/2) $
+$ F(x) = x/alpha - (|x| times x)/(2alpha^2) + 1/2 $
+```
+
+```{=typst} 
+#pagebreak()
+```
+
+### Calcul de la fonction de répartition inverse
+
+```{=typst}
+$ u = F(x) = x/alpha - (|x| times x)/(2alpha^2) + 1/2 $
+$ 2u= (2x)/alpha - (|x| times x)/alpha^2 + 1 $
+$ 2u alpha^2= 2x alpha - |x| times x + alpha^2 $
+
+
+
+#grid(
+  columns: 2,
+cell[
+$
+"Cas x > 0 <=> u > 0.5 \n "
+\
+2u alpha^2= 2x alpha - x^2 + alpha^2
+$
+$
+2u alpha^2 - 2 alpha ^2= 2x alpha - x^2 - alpha^2
+$
+$
+-(2u alpha^2 - 2 alpha ^2)= -2x alpha + x^2 + alpha^2
+$
+$
+2 alpha ^2 - 2u alpha^2= -2x alpha + x^2 + alpha^2
+$
+$
+2 alpha ^2(1-u)= (x-alpha)^2
+$
+$
+alpha sqrt(2(1-u))= alpha-x "(car " alpha>x)
+$
+$
+alpha sqrt(2(1-u))-alpha= -x
+$
+$
+alpha - alpha sqrt(2(1-u))= x
+$
+$
+x = alpha ( 1 - sqrt(2(1-u)) )
+$
+
+],
+cell[
+  $
+"Cas x < 0 <=> u < 0.5 \n "
+\
+2u alpha^2= 2x alpha + x^2 + alpha^2
+$
+$
+2u alpha^2= (x+alpha)^2
+$
+$
+alpha sqrt(2u)= x+alpha
+$
+$
+alpha sqrt(2u)-alpha= x
+$
+$
+x = alpha (sqrt(2u) - 1)
+$
+]
+)
+
+```
+
+```{=typst} 
+#pagebreak()
+```
+
+### Programmation
+
+On définit nos variables, ici je prends $alpha=2$
+```{python}
+al = 2
+a = -al
+b = al
+essai = 100000
+```
+
+On définit nos fonctions calculés précédemment.
+```{python}
+p = lambda x : 1/al*( 1 - np.abs(x)/al )*(abs(x)<=al)
+f = lambda x : ( 1/2 + x/al - x*abs(x)/(2*al**2) ) * (abs(x) <= al ) + 1 * ( x > al )
+f_inv = lambda u : al*( ( np.sqrt(2*u)-1 ) * (u<1/2) + ( 1-np.sqrt( 2*(1-u) ) ) *(1/2<u) )
+```
+
+On calcule nos différentes fonctions à afficher.
+```{python}
+x = np.arange(a,b,0.1)
+repartition = f(x)
+densite = p(x)
+inverse = f_inv( rd.rand(essai) )
+```
+
+```{=typst} 
+#pagebreak()
+```
+
+Maintenant on affiche la densité de probabilité et la fonction de répartition
+
+```{python}
+#| fig-cap: "Affichage la densité de probabilité et la fonction de répartition"
+
+
+plt.figure(1)
+plt.plot(x,repartition, label='répartition théorique')
+plt.plot(x,densite, label='densité théorique')
+plt.legend(loc='best')
+plt.show()
+
+```
+
+```{=typst} 
+#pagebreak()
+```
+
+Et on affiche la densité de probabilité théorique et de l'histogramme de la densité de probabilité expérimentale.
+
+```{python}
+#| fig-cap: "Affichage de la densité de probabilité théorique et expérimentale"
+
+plt.figure(2)
+plt.plot(x,densite, label="densité théorique")
+plt.hist(inverse,x, label="densité expérimentale", density='True')
+plt.legend(loc='best')
+plt.show()
+```
+
+
+On remarque que notre variable aléatoire suit globalement notre triangle, ce qui confirme le succès de cette génération aléatoire.
+
+# Conclusion
+
+Comme nous avons pu le voir lors de ce TP, nos Variables Aléatoires suivent le comportement escompté. On peut alors dire que simuler des variables alétoires suivant autre chose qu'une loi uniforme est possible.

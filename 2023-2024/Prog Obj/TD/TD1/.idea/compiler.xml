@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <file url="file://$PROJECT_DIR$/Java/td1/partie2/FileTableauSansDec.java" />
+      <file url="file://$PROJECT_DIR$/Java/td1/partie2/Main.java" />
+    </excludeFromCompile>
+  </component>
+</project>
