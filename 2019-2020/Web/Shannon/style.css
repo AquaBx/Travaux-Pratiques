@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css?family=Lexend+Deca&display=swap");
+html,
+button {
+  font-family: "Lexend Deca", sans-serif;
+  margin: 0;
+  color: white;
+}
+body {
+  background-color: rgb(50, 50, 50);
+}
+.container {
+  border: 5px solid rgb(40, 40, 40);
+  display: flex;
+  background-color: rgb(30, 30, 30);
+  width: clamp(300px, 95%, 900px);
+  height: auto;
+  margin: auto;
+  border-radius: 15px;
+  transition: 0.5s;
+  position: relative;
+}
+.container:hover {
+  border: 5px solid rgb(44, 128, 255);
+}
+a {
+  color: rgb(44, 128, 255);
+  transition: 0.5s;
+}
+
+a:hover {
+  color: rgb(255, 44, 44);
+}
+
+h1,
+h2,
+h3 {
+  text-decoration: underline solid white;
+}
+
+.container .back {
+  background: url("./shannon.webp")
+    no-repeat;
+  background-size: contain;
+  padding-left: 250px;
+  border-radius: 15px;
+}
+
+.containerdiv {
+  flex: 0;
+  height: auto;
+  transition: 1s;
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.containerdiv p {
+  margin: 10px;
+}
+
+.div-active {
+  flex: 1;
+  width: 100%;
+  opacity: 1;
+  height: auto;
+}
+
+button {
+  border: none;
+  border-bottom: 3px solid white;
+  margin: 0;
+  padding: 10px 20px;
+  background: none;
+  transition: 0.5s;
+}
+
+.btn-active {
+  border-bottom: 3px solid red;
+}
+
+button:hover {
+  background: rgb(44, 128, 255);
+}
+
+.centered {
+  margin: 30px auto;
+  display: block;
+}
