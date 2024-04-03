@@ -1,0 +1,33 @@
+SELECT COUNT(*) FROM `etudiant`
+SELECT `nomEtudiant`,`prenomEtudiant` FROM `etudiant` WHERE `prenomEtudiant` LIKE '%le%';
+SELECT etudiant.prenomEtudiant,etudiant.nomEtudiant FROM `etudiantmatiere`INNER JOIN etudiant USING(id_etudiant)  WHERE etudiantmatiere.codeMatiere='BDD' ;
+SELECT etudiant.prenomEtudiant,etudiant.nomEtudiant,matiere.libelle FROM `etudiantmatiere`INNER JOIN etudiant USING(id_etudiant) JOIN matiere ON etudiantmatiere.codeMatiere=matiere.codeMatiere  WHERE etudiantmatiere.codeMatiere='BDD' OR etudiantmatiere.codeMatiere='ALGO' ;
+SELECT etudiant.*,adresse.* FROM `etudiant` JOIN adresse USING(`id_adresse`)  WHERE `prenomEtudiant`="emile"
+SELECT etudiant.prenomEtudiant,etudiant.nomEtudiant,matiere.libelle FROM `etudiantmatiere`INNER JOIN etudiant USING(id_etudiant) JOIN matiere ON etudiantmatiere.codeMatiere=matiere.codeMatiere  WHERE etudiantmatiere.codeMatiere='BDD' OR etudiantmatiere.codeMatiere='ALGO' ORDER BY etudiantmatiere.codeMatiere,etudiant.nomEtudiant;
+SELECT etudiant.prenomEtudiant,etudiant.nomEtudiant,etudiantmatiere.codeMatiere,etudiantmatiere.note FROM `etudiantmatiere`INNER JOIN etudiant USING(id_etudiant) 
+SELECT AVG(note) FROM `etudiantmatiere`
+SELECT AVG(note) FROM `etudiantmatiere` GROUP BY codeMatiere
+
+
+Exo 2
+
+SELECT titre FROM `film` WHERE 1990 <= annee AND annee <= 1999
+SELECT nom FROM `artiste` WHERE annee_nais IS NOT NULL
+SELECT nom FROM `artiste` WHERE annee_nais IS NULL
+
+SELECT DISTINCT a1.nom,a2.nom 
+FROM `artiste` as a1 
+	JOIN `artiste` as a2
+	ON a1.annee_nais=a2.annee_nais 
+    	AND a1.ida > a2.ida
+
+SELECT DISTINCT film.titre
+    FROM seance
+    JOIN cinema
+    	USING(idc)
+    JOIN film
+	USING(idf)
+WHERE
+cinema.ville LIKE "%Lyon%" or cinema.ville LIKE "%Paris%"
+
+SELECT nom,annee_nais  FROM `artiste` WHERE annee_nais=(SELECT MIN(annee_nais) FROM artiste)
