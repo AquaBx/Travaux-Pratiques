@@ -1,0 +1,67 @@
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./style.css">
+	<title>Shannon</title>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+  <div class="container">
+    <div class="back">
+      <h2 id="article-h">Claude Shannon</h2>
+      <ul>
+        <li id="li1">
+          Naissance : 30 avril 1916
+        </li>
+        <li id="li2">
+          Mariage : 1949 avec <a target="blank" href="https://en.wikipedia.org/wiki/Betty_Shannon">Mary Elizabeth Moore</a>
+        </li>
+        <li id="li3">
+          Décès : 24 février 2001
+        </li>
+        <li id="li4">
+          Nationalité : Américaine
+        </li>
+        <li id="li5">
+          Profession : Professeur au <a target="blank" href="https://fr.wikipedia.org/wiki/Massachusetts_Institute_of_Technology">MIT</a> et Ingénieur chez
+          <a href="https://fr.wikipedia.org/wiki/Laboratoires_Bell" target="blank">AT&T Bell</a> sur la théorie de l'information
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="article-slide" class="container" style="margin-top: 50px; height:auto;display:block;">
+    <h2 style="text-align: center;">Mes centres d'intérêts</h2>
+    <div style="display:flex;">
+      <button id="btn1" class="btn-active" style="flex:1" onclick="show('1')">L'intelligence artificielle</button>
+      <button id="btn2" style="flex:1" onclick="show('2')">La transmission des signaux</button>
+      <button id="btn3" style="flex:1" onclick="show('3')">L'entropie</button>
+    </div>
+    <div style="display:flex;overflow:hidden;">
+      <div id="div1" class="containerdiv div-active">
+        <p>
+          J'ai écrit un livre (
+          <a target="blank" href="https://fr.wikipedia.org/wiki/Programming_a_Computer_for_Playing_Chess">Programming a Computer for Playing Chess</a>
+          ) et créé la première machine qui permet de jouer aux échecs (en 1949).
+        </p>
+      </div>
+      <div id="div2" class="containerdiv">
+        <p>
+          J'ai compris que toute donnée, même la voix ou des images, peut se transmettre à l'aide d'une suite binaire : c'est de la que découle le passage de
+          communications analogiques à numériques
+        </p>
+        <img style="width:75%;" class="centered" src="./codage_shannon.webp">
+        <button class="centered" onclick="convert('article-h');boucle()">
+          Bonus
+        </button>
+      </div>
+      <div id="div3" class="containerdiv">
+        <p>
+          <a target="blank" href="https://fr.wikipedia.org/wiki/Entropie_de_Shannon">L'entropie</a>, qui mesure la quantité d'information portée par un message numérique; cette notion est très importante en cryptographie ou en compression de données.
+        </p>
+      </div>
+    </div>
+  </div>
+  <script src="./script.js"></script>
+</body>
+</html>
