@@ -8,30 +8,29 @@
    @return position du premier élément de valeur >= x
    ou end() si un tel élément n'existe pas
  */
-// TODO
 template<class InputIterator , class T>
 InputIterator chercherTri(InputIterator premier, InputIterator dernier, T x){
-   while (premier != dernier){
+   while (premier != dernier){ // on itère sur tout
       if (*premier >= x) {
-         return premier;
+         return premier; // si on trouve un supérieur on sort
       }
-      ++premier;
+      ++premier; // sinon on incrémente
    }
-   return premier;
+   return premier; // on retourne premier = dernier
 }
 
 /**
    3.2.2 créer une copie triée par valeurs croissantes d'une liste, nom de la fonction fonction : copierTri
    @param l : liste à copier
-   @return liste triée
+   @return liste triée, ⚠️ il faut la delete après utilisation
 */
-// TODO
 template<class T>
 Liste<T> * copierTri(Liste<T> l){
-   Liste<T> * newliste = new Liste<T>();
+   Liste<T> * newliste = new Liste<T>(); // on créer une liste
    for (auto ptr = l.begin(); ptr != l.end(); ++ptr) {
-      auto wheretoinsert = chercherTri(newliste->begin(),newliste->end(),*ptr);
-      newliste->insert(wheretoinsert,*ptr);
+      // désolé pour les auto, mais ça m'énervait :)
+      auto wheretoinsert = chercherTri(newliste->begin(),newliste->end(),*ptr); // on cherche où est premier nombre supérieur à x
+      newliste->insert(wheretoinsert,*ptr); // on insert le nombre juste avant wheretoinsert
    }
 
    return newliste;
