@@ -26,7 +26,8 @@ protected:
     }
 
     // méthode qui va ajouter tout les éléments de begin à end dans liste
-    copy(Liste & liste , const_iterator begin, const_iterator end ){
+    template<class Iter>
+    void copy(Liste & liste , Iter begin, Iter end ){
         while (begin != end){
             liste.push_back(*begin);
             ++begin;
@@ -227,7 +228,7 @@ public:
     void pop_front() {
         assert(size() > 0);
 
-        sentinelle.next()->detach();
+        delete sentinelle.next();
         taille--;
     }
 
@@ -235,7 +236,7 @@ public:
     void pop_back() {
         assert(size() > 0);
 
-        sentinelle.previous()->detach();
+        delete sentinelle.previous();
         taille--;
     }
 
@@ -280,7 +281,7 @@ public:
 
         iterator temp = iterator(&sentinelle,position.getPointer() -> next());
 
-        position.getPointer() -> detach();
+        delete position.getPointer();
 
         taille--;
 
