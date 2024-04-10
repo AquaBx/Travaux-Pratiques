@@ -56,7 +56,7 @@ class Agent : public Environment::LocalizedEntity {
     private:
         Status status = running;
 
-        static std::set<Agent*> mesAgents; 
+        static std::set<Agent*> mesAgents;
 };
 
 #endif

@@ -12,7 +12,7 @@ class Food : public Agent {
     float quantite;
 
     public:
-        Food(Environment * env, float x, float y, float quantite ) : Agent(env,x,y ), quantite(quantite){           
+        Food(Environment * env, float x, float y, float quantite ) : Agent(env,x,y ), quantite(quantite) , last_quantite(quantite) {
             setRadius(MathUtils::circleRadius(quantite));
         }
 

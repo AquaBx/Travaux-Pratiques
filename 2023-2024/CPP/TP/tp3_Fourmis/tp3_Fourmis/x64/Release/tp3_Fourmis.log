@@ -1,0 +1,2 @@
+﻿MSVCRT.lib(exe_main.obj) : error LNK2001: symbole externe non résolu main
+E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp3_Fourmis\x64\Release\tp3_Fourmis.exe : fatal error LNK1120: 1 externes non résolus
