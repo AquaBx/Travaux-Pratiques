@@ -8,6 +8,7 @@
 #include <Agent.h>
 #include <Food.h>
 #include <Anthill.h>
+#include <SillyAnt.h>
 
 static unsigned int windowWidth() { return 1024; }
 static unsigned int windowHeight() { return 700; }
@@ -22,7 +23,12 @@ void onKeyPressed(char key, Environment * environment)
 
 	if ( key == 'a'){
 		Vector2<float> v = (*environment).randomPosition();
-		new Anthill(environment,v[0],v[1]);
+		Anthill * newfour = new Anthill(environment,v[0],v[1]);
+
+		for (int i = 0 ; i < 100 ; i++)
+		{
+			new SillyAnt(environment, newfour);
+		}
 	}
 
 	if ( key == 'f'){
