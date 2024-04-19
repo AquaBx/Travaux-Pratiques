@@ -200,6 +200,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AntBasePheromone.hpp" />
+    <ClInclude Include="Pheromone.h" />
     <ClInclude Include="src\Agent.h" />
     <ClInclude Include="src\AntBase.h" />
     <ClInclude Include="src\Anthill.h" />
@@ -208,11 +210,12 @@
     <ClInclude Include="src\MathUtils.h" />
     <ClInclude Include="src\Rectangle.h" />
     <ClInclude Include="src\Renderer.h" />
+    <ClInclude Include="src\SillyAnt.h" />
     <ClInclude Include="src\Timer.h" />
     <ClInclude Include="src\Vector2.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Agent.cpp" />
+    <ClCompile Include="src\Agent.cpp" />
     <ClCompile Include="src\Environment.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>

@@ -6,7 +6,6 @@
 
 class Agent : public Environment::LocalizedEntity {
 
-
     public:
         typedef enum { running, destroy } Status;
 
