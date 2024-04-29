@@ -8,7 +8,7 @@
 #include <Agent.h>
 #include <Food.h>
 #include <Anthill.h>
-#include <SillyAnt.h>
+#include <Ant.h>
 
 static unsigned int windowWidth() { return 1024; }
 static unsigned int windowHeight() { return 700; }
@@ -27,7 +27,7 @@ void onKeyPressed(char key, Environment * environment)
 
 		for (int i = 0 ; i < 100 ; i++)
 		{
-			new SillyAnt(environment, newfour);
+			new Ant(environment, newfour);
 		}
 	}
 
@@ -101,6 +101,9 @@ int main(int /*argc*/, char ** /*argv*/)
 		// 3 - We render the scene
 		Renderer::getInstance()->flush();
 	}
+
+	std::cout << "Tuage des agents" << std::endl;
+	Agent::finalize();
 
 	std::cout << "Shutting down renderer..." << std::endl;
 	Renderer::finalize();
