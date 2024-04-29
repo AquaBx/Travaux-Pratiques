@@ -21,7 +21,9 @@ public:
 
     Pheromone(Environment* env , float x , float y , float quantity)
         : Agent(env, x , y), quantity(quantity)
-    {}
+    {
+        //setRadius(10);
+    }
 
     float getQuantity()
     {
@@ -44,7 +46,7 @@ public:
         (Renderer::getInstance())->drawCircle(getPosition(), getRadius(), color);
 
 
-        quantity *= 0.01 * Timer::dt();
+        quantity -= 0.01 * Timer::dt() * quantity;
     }
 
 };

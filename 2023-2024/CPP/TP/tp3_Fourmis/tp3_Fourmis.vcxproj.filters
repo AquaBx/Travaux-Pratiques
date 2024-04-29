@@ -48,11 +48,14 @@
     <ClInclude Include="src\SillyAnt.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
-    <ClInclude Include="Pheromone.h">
+    <ClInclude Include="src\AntBasePheromone.h">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
-    <ClInclude Include="AntBasePheromone.hpp">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="src\Ant.h">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Pheromone.h">
+      <Filter>Fichiers sources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
