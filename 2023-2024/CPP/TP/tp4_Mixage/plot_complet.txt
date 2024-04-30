@@ -1,0 +1,49 @@
+# grid style
+set style line 12 lc rgb'#808080' lt 0 lw 1
+set grid back ls 12
+set tics scale 0.75
+
+# 500 valeurs d'un fichier
+plot [500:1000] '04_harmonique.wav' binary skip=44 format='%int16' using 1 
+
+# idem avec 2 fichiers
+plot [500:1000] '04_harmonique.wav' binary skip=44 format='%int16' using 1 , '09_multiplicateur.wav' binary skip=44 format='%int16' using 1
+
+# idem avec styles d'affichages distincts
+plot [500:1000] '04_harmonique.wav' binary skip=44 format='%int16' using 1 with impulses , '09_multiplicateur.wav' binary skip=44 format='%int16' using 1 with lines
+
+# afficher le volume avant/après réduction ainsi que la sortie d'un mixeur
+plot [43200:45000] '14_volume_compose.wav' binary skip=44 format='%int16' using 1, '15_mixeur_harmoniques.wav' binary skip=44 format='%int16' using 1 with lines lt rgb "#2200dd"
+
+# afficher les deux voies d'un fichier stéréo (entrelacé) en sautant l'entête de fichier
+plot [90000:91000] 'stereo.wav' binary skip=44 format='%int16%*int16' using 1 with lines, 'stereo.wav' binary skip=44 format='%int16'using 2 with lines
+
+# afficher les 2 voies de deux fichiers stéréo avec des couleurs de trait
+
+# début
+plot [100000:101000] \
+    'stereo.wav' binary skip=44 \
+	format='%int16%*int16' using 1 \
+	with lines lc rgb 'red' title 'stereo.wav : Voie Gauche', \
+    'stereo.wav' binary skip=44 \
+	format='%int16'using 2 \
+	with lines lc rgb 'blue' title 'stereo.wav : Voie Droite', \
+    '18_fade_in.wav' binary skip=44 \
+	format='%int16%*int16' using 1 \
+	with lines lc rgb 'orange' title '18\_fade\_in.wav : Voie Gauche', \
+    '18_fade_in.wav' binary skip=44 \
+        format='%int16' using 2 \
+	with lines lc rgb 'violet' title '18\_fade\_in.wav : Voie Droite'
+
+# à 0.5s la piste de gauche "démarre" (courbe orange<=>red)
+#plot [22000:22500] ...
+
+# à 1.5s la piste de droite démarre (courbe violet<=>bleu)
+#plot [66000:66500] ...
+
+#plot [90000:90500] ...
+
+# sortie dans un fichier png
+set terminal png size 1600,1000
+set output 'plot_complet.png'
+replot

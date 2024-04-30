@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\imp_flot.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\signal_constant.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="enregistreur_fichier_wav.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\composant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\composant_exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\consommateur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\constantes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\enregistreur_fichier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\enregistreur_fichier_texte.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\filtre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\flot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\producteur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imp_flot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\signal_constant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="doc\index.html" />
+    <None Include="doc\search\all_0.html" />
+    <None Include="doc\search\all_1.html" />
+    <None Include="doc\search\all_2.html" />
+    <None Include="doc\search\all_3.html" />
+    <None Include="doc\search\all_4.html" />
+    <None Include="doc\search\all_5.html" />
+    <None Include="doc\search\all_6.html" />
+    <None Include="doc\search\all_7.html" />
+    <None Include="doc\search\all_8.html" />
+    <None Include="doc\search\all_9.html" />
+    <None Include="doc\search\all_a.html" />
+    <None Include="doc\search\classes_0.html" />
+    <None Include="doc\search\classes_1.html" />
+    <None Include="doc\search\classes_2.html" />
+    <None Include="doc\search\classes_3.html" />
+    <None Include="doc\search\functions_0.html" />
+    <None Include="doc\search\functions_1.html" />
+    <None Include="doc\search\functions_2.html" />
+    <None Include="doc\search\functions_3.html" />
+    <None Include="doc\search\functions_4.html" />
+    <None Include="doc\search\functions_5.html" />
+    <None Include="doc\search\functions_6.html" />
+    <None Include="doc\search\functions_7.html" />
+    <None Include="doc\search\functions_8.html" />
+    <None Include="doc\search\nomatches.html" />
+  </ItemGroup>
+</Project>
