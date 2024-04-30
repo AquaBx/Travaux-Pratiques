@@ -14,15 +14,17 @@
 void
 q2_signal_constant()
 {
-  signal_constant constant(0.5);
-  enregistreur_fichier_texte enregistreur("02_constant.txt", 1);
-  enregistreur.connecterEntree(constant.getSortie(0), 0);
-  // générer des valeurs
-  for (unsigned int i = 0; i < 50; ++i) {
-    constant.calculer();
-    enregistreur.calculer();
-  }
+	signal_constant constant(0.5);
+	enregistreur_fichier_texte enregistreur("02_constant.txt", 1);
+	enregistreur.connecterEntree(constant.getSortie(0), 0);
+	// générer des valeurs
+	for (unsigned int i = 0; i < 50; ++i)
+	{
+		constant.calculer();
+		enregistreur.calculer();
+	}
 }
+
 /*
 void
 q4_harmonique()
@@ -40,7 +42,13 @@ q4_harmonique()
 int
 main()
 {
-  q2_signal_constant();
-  //  q4_harmonique();
-  return 0;
+	q2_signal_constant();
+	//  q4_harmonique();
+	return 0;
+}
+
+int
+WinMain()
+{
+	return main();
 }

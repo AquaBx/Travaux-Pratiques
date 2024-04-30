@@ -18,12 +18,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\imp_flot.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\signal_constant.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="enregistreur_fichier_wav.h">
@@ -62,33 +56,5 @@
     <ClInclude Include="include\signal_constant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="doc\index.html" />
-    <None Include="doc\search\all_0.html" />
-    <None Include="doc\search\all_1.html" />
-    <None Include="doc\search\all_2.html" />
-    <None Include="doc\search\all_3.html" />
-    <None Include="doc\search\all_4.html" />
-    <None Include="doc\search\all_5.html" />
-    <None Include="doc\search\all_6.html" />
-    <None Include="doc\search\all_7.html" />
-    <None Include="doc\search\all_8.html" />
-    <None Include="doc\search\all_9.html" />
-    <None Include="doc\search\all_a.html" />
-    <None Include="doc\search\classes_0.html" />
-    <None Include="doc\search\classes_1.html" />
-    <None Include="doc\search\classes_2.html" />
-    <None Include="doc\search\classes_3.html" />
-    <None Include="doc\search\functions_0.html" />
-    <None Include="doc\search\functions_1.html" />
-    <None Include="doc\search\functions_2.html" />
-    <None Include="doc\search\functions_3.html" />
-    <None Include="doc\search\functions_4.html" />
-    <None Include="doc\search\functions_5.html" />
-    <None Include="doc\search\functions_6.html" />
-    <None Include="doc\search\functions_7.html" />
-    <None Include="doc\search\functions_8.html" />
-    <None Include="doc\search\nomatches.html" />
   </ItemGroup>
 </Project>

@@ -83,6 +83,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)\winlibs\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>LibOutils.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -94,6 +96,8 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
+      <AdditionalLibraryDirectories>$(SolutionDir)\winlibs\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>LibOutils.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,6 +111,8 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\winlibs\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>LibOutils.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -120,11 +126,11 @@
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)\winlibs\$(Platform)\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>LibOutils.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\imp_flot.cpp" />
-    <ClCompile Include="include\signal_constant.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,34 +146,6 @@
     <ClInclude Include="include\imp_flot.h" />
     <ClInclude Include="include\producteur.h" />
     <ClInclude Include="include\signal_constant.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="doc\index.html" />
-    <None Include="doc\search\all_0.html" />
-    <None Include="doc\search\all_1.html" />
-    <None Include="doc\search\all_2.html" />
-    <None Include="doc\search\all_3.html" />
-    <None Include="doc\search\all_4.html" />
-    <None Include="doc\search\all_5.html" />
-    <None Include="doc\search\all_6.html" />
-    <None Include="doc\search\all_7.html" />
-    <None Include="doc\search\all_8.html" />
-    <None Include="doc\search\all_9.html" />
-    <None Include="doc\search\all_a.html" />
-    <None Include="doc\search\classes_0.html" />
-    <None Include="doc\search\classes_1.html" />
-    <None Include="doc\search\classes_2.html" />
-    <None Include="doc\search\classes_3.html" />
-    <None Include="doc\search\functions_0.html" />
-    <None Include="doc\search\functions_1.html" />
-    <None Include="doc\search\functions_2.html" />
-    <None Include="doc\search\functions_3.html" />
-    <None Include="doc\search\functions_4.html" />
-    <None Include="doc\search\functions_5.html" />
-    <None Include="doc\search\functions_6.html" />
-    <None Include="doc\search\functions_7.html" />
-    <None Include="doc\search\functions_8.html" />
-    <None Include="doc\search\nomatches.html" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

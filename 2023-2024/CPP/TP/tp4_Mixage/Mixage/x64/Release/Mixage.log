@@ -1,0 +1,6 @@
+﻿  main.cpp
+LINK : warning LNK4075: ' /INCREMENTAL' ignoré à cause de la spécification '/OPT:ICF'
+  LibOutils.lib(enregistreur_fichier_texte.obj) : .netmodule ou module MSIL compilé avec /GL trouvé ; redémarrage de l'édition de liens avec /LTCG ; ajoutez /LTCG à la ligne de commande de l'édition de liens pour améliorer les performances de l'Éditeur de liens
+LINK : warning LNK4075: ' /INCREMENTAL' ignoré à cause de la spécification '/LTCG'
+MSVCRT.lib(exe_winmain.obj) : error LNK2001: symbole externe non résolu WinMain
+E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\x64\Release\Mixage.exe : fatal error LNK1120: 1 externes non résolus
