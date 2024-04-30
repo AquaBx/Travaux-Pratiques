@@ -18,6 +18,10 @@ public:
 		echantillons.clear();
 	}
 
+	int getLength(){
+		return length;
+	}
+
 	double extraire() override
 	{
 		assert(!vide());
