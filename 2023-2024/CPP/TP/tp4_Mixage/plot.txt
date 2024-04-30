@@ -1,0 +1,13 @@
+# grid style
+#set style line 12 lc rgb'#808080' lt 0 lw 1
+set grid back ls 12
+set tics scale 0.75
+
+# 500 valeurs d'un fichier
+plot [500:1000] '04_harmonique.wav' binary skip=44 format='%int16' using 1 
+
+# idem avec 2 fichiers
+plot [500:1000] '04_harmonique.raw' binary skip=44 format='%int16' using 1 with impulses , '09_multiplicateur.raw' binary skip=44
+format='%int16' using 1 with lines
+
+pause -1
