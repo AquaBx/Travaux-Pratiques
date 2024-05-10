@@ -6,8 +6,8 @@ class AbstractAntRule : public AbstractRule
 {
 protected:
 	AntBasePheromone* fourmi;
+public:
 
-	AbstractAntRule(AntBasePheromone* fourmi) : fourmi(fourmi)
-	{
-	}
+	AbstractAntRule(AntBasePheromone* fourmi) : fourmi(fourmi)	{}
+
 };
