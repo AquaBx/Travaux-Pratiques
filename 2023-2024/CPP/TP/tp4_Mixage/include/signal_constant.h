@@ -7,13 +7,13 @@ class signal_constant : public producteur
 
 private:
 	std::shared_ptr<flot> flotSortie;
+	double entree;
 
 public:
 
-	signal_constant(double entree) 
+	signal_constant(double entree) : entree(entree)
 	{
 		flotSortie = std::make_shared<imp_flot>();
-		flotSortie->inserer(entree);
 	}
 
 	~signal_constant() override {}
@@ -30,6 +30,6 @@ public:
 
 	void calculer() override
 	{
-		
+		flotSortie->inserer(entree);
 	};
 };

@@ -1,2 +1,7 @@
 ﻿  main.cpp
-  Mixage.vcxproj -> E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\x64\Debug\Mixage.exe
+C:\GitHub\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\include\consommateur_base.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'src/main.cpp')
+  
+LibOutils.lib(enregistreur_fichier.obj) : warning LNK4099: PDB '' was not found with 'LibOutils.lib(enregistreur_fichier.obj)' or at ''; linking object as if no debug info
+LibOutils.lib(enregistreur_fichier_texte.obj) : warning LNK4099: PDB '' was not found with 'LibOutils.lib(enregistreur_fichier_texte.obj)' or at ''; linking object as if no debug info
+  Mixage.vcxproj -> C:\GitHub\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\x64\Debug\Mixage.exe

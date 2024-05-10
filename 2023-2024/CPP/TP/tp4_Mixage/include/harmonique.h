@@ -1,38 +1,27 @@
 #pragma once
 #include "producteur_base.h"
 #include "imp_flot.h"
+#include "constantes.h"
 
 class harmonique : public producteur_base
 {
 
-protected:
-    void connecterEntree(const std::shared_ptr<flot> & f, unsigned int numentree) override{
+	protected:
+		double phi;
+		double f;
+		int i = 0;
 
-    };
+	public:
+		harmonique(double f, double phi = 0) : producteur_base(1), phi(phi), f(f)
+		{
+			connecterSortie(std::make_shared<imp_flot>(),0);
+		}
 
-public:
-
-	harmonique(double entree) 
-	{
-		flotSortie = std::make_shared<imp_flot>();
-		flotSortie->inserer(entree);
-	}
-
-	~harmonique() override {}
-
-	unsigned int nbSorties() const override
-	{
-		return 1;
-	}
-
-	const std::shared_ptr<flot>& getSortie(unsigned int numsortie) const override
-	{
-		return flotSortie;
-	}
-
-	void calculer() override
-	{
-		
-	};
+		void calculer() override
+		{
+			double calcul = sin(static_cast<float>(i) / MixageSonore::frequency * 2.0 * MixageSonore::pi * f + phi);
+			m_lesSorties[0]->inserer(calcul);
+			i += 1;
+		};
 
 };
