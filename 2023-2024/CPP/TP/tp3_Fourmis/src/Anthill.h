@@ -3,28 +3,29 @@
 
 #include <Agent.h>
 #include <Environment.h>
-#include <set>
 #include <Renderer.h>
 
-class Anthill : public Agent {
+class Anthill : public Agent
+{
+protected:
+	float stock = 0;
 
-    float stock = 0;
+public:
+	Anthill(Environment* env, float x, float y) : Agent(env, x, y)
+	{
+		setRadius(10);
+	}
 
+	void depositFood(float quantity)
+	{
+		stock += quantity;
+	}
 
-    public:
-
-        Anthill(Environment * env, float x , float y) : Agent( env, x,y ){           
-            setRadius(10);
-        }
-    
-        void depositFood(float quantity){
-            stock += quantity;
-        }
-
-        void update(){
-            Renderer::Color color = Renderer::Color(0,0,255,255);
-            (Renderer::getInstance()) -> drawCircle(getPosition(),getRadius(),color);
-        }
+	void update() override
+	{
+		auto color = Renderer::Color(0, 0, 255, 255);
+		(Renderer::getInstance())->drawCircle(getPosition(), getRadius(), color);
+	}
 };
 
 #endif

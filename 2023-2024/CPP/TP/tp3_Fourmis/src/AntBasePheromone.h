@@ -3,60 +3,56 @@
 
 #include <Agent.h>
 #include <Environment.h>
-#include <set>
 #include <Renderer.h>
 #include <AntBase.h>
 
 #include <Pheromone.h>
 
-class AntBasePheromone : public AntBase {
-
-
+class AntBasePheromone : public AntBase
+{
 public:
+	// choix d'une pheromone
+	Pheromone* choosePheromone() const
+	{
+		std::vector<Pheromone*> pheromones = perceive<Pheromone>(direction, MathUtils::pi / 2, 8.0);
 
-    Pheromone* choosePheromone() const
-    {
+		if (pheromones.size() == 0) return nullptr;
 
-        std::vector<Pheromone*> pheromones = LocalizedEntity::perceive<Pheromone>(direction, MathUtils::pi / 2, 8.0);
+		auto weight = std::vector<float>();
 
-        if (pheromones.size() == 0) return nullptr;
+		for (auto i = pheromones.begin(); i < pheromones.end(); ++i)
+		{
+			weight.push_back((*i)->getQuantity());
+		}
 
-        std::vector<float> weight = std::vector<float>();
+		int r = MathUtils::randomChoose(weight);
 
-        for (auto i = pheromones.begin(); i < pheromones.end(); ++i)
-        {
-            weight.push_back((*i)->getQuantity());
-        }
+		return pheromones.at(r);
+	}
 
-        int r = MathUtils::randomChoose(weight);
+	// pose de phéromone
+	void putPheromone(float q)
+	{
+		std::vector<Pheromone*> pheromones = perceive<Pheromone>();
 
-        return pheromones.at(r);
-    }
+		if (pheromones.size() > 0)
+		{
+			for (auto i = pheromones.begin(); i < pheromones.end(); ++i)
+			{
+				(*i)->addQuantity(q);
+			}
+		}
+		else
+		{
+			new Pheromone(getEnvironment(), getPosition()[0], getPosition()[1], q);
+		}
+	}
 
-    void putPheromone(float q)
-    {
-        std::vector<Pheromone*> pheromones = LocalizedEntity::perceive<Pheromone>();
 
-	    if (pheromones.size() > 0)
-	    {
-		    for ( auto i = pheromones.begin(); i < pheromones.end() ; ++i)
-		    {
-                (*i)->addQuantity(q);
-		    }
-	    }
-        else
-        {
-
-            new Pheromone(getEnvironment(), getPosition()[0], getPosition()[1], q);
-        }
-    }
-
-    AntBasePheromone(Environment* env, Anthill* fourmilliere) :
-        AntBase(env, fourmilliere, Vector2<float>(MathUtils::random(), MathUtils::random()).normalized())
-    {}
-
- 
-
+	AntBasePheromone(Environment* env, Anthill* fourmilliere) :
+		AntBase(env, fourmilliere, Vector2<float>(MathUtils::random(-1, 1), MathUtils::random(-1, 1)).normalized())
+	{
+	}
 };
 
 #endif

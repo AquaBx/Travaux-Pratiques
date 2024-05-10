@@ -4,58 +4,66 @@
 #include <Environment.h>
 #include <set>
 
-class Agent : public Environment::LocalizedEntity {
+class Agent : public Environment::LocalizedEntity
+{
+public:
+	using Status = enum { running, destroy };
 
-    public:
-        typedef enum { running, destroy } Status;
+	Agent(Environment* env, float x, float y) : LocalizedEntity(env, Vector2<float>(x, y))
+	{
+		setRadius(defaultRadius());
+		mesAgents.insert(this);
+	}
 
-        Agent(Environment * env, float x, float y) : Environment::LocalizedEntity( env,Vector2<float>(x,y) ){           
-            setRadius( defaultRadius() );
-            mesAgents.insert(this);
-        }
+	// abstract méthode
+	virtual void update() = 0;
 
-        // abstract méthode
-        virtual void update() = 0;
+	void setStatus(Status new_status)
+	{
+		status = new_status;
+	}
 
-        void setStatus(Status new_status){
-            status = new_status;
-        }
+	Status getStatus() const
+	{
+		return status;
+	}
 
-        Status getStatus() const{
-            return status;
-        }
+	static void simulate()
+	{
+		auto begin = mesAgents.begin();
+		auto end = mesAgents.end();
 
-        static void simulate(){
-            std::set<Agent *>::iterator begin = mesAgents.begin();
-            std::set<Agent *>::iterator end = mesAgents.end();
-            
-            while (begin != end) {
-                if ( (*begin)->getStatus() == running ) {
-                    (*begin)->update();
-                    ++begin;
-                }
-                else if ((*begin)->getStatus() == destroy)
-                {
-                    delete *begin;
-                    begin = mesAgents.erase(begin);
-                }
-            }
-        }
+		while (begin != end)
+		{
+			if ((*begin)->getStatus() == running)
+			{
+				(*begin)->update();
+				++begin;
+			}
+			else if ((*begin)->getStatus() == destroy)
+			{
+				delete *begin;
+				begin = mesAgents.erase(begin);
+			}
+		}
+	}
 
-        static void finalize(){
-            std::set<Agent *>::iterator begin = mesAgents.begin();
-            std::set<Agent *>::iterator end = mesAgents.end();
+	static void finalize()
+	{
+		auto begin = mesAgents.begin();
+		auto end = mesAgents.end();
 
-            while (begin != end) {
-                delete *begin;
-                begin = mesAgents.erase(begin);
-            }
-        }
+		while (begin != end)
+		{
+			delete *begin;
+			begin = mesAgents.erase(begin);
+		}
+	}
 
-    private:
-        Status status = running;
+private:
+	Status status = running;
 
-        static std::set<Agent*> mesAgents;
+	static std::set<Agent*> mesAgents;
 };
 
 #endif

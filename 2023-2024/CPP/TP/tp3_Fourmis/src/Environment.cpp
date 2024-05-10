@@ -1,7 +1,7 @@
 #include <Environment.h>
 
 
-Environment::LocalizedEntity::LocalizedEntity(Environment * environment, const Vector2<float>& position, float radius)
+Environment::LocalizedEntity::LocalizedEntity(Environment* environment, const Vector2<float>& position, float radius)
 	: m_position(position), m_radius(radius), m_environment(environment)
 {
 	m_environment->addEntity(this);
@@ -24,7 +24,7 @@ void Environment::LocalizedEntity::setPosition(const Vector2<float>& position)
 	m_environment->addEntity(this);
 }
 
-void Environment::LocalizedEntity::translate(Vector2<float> const & v)
+void Environment::LocalizedEntity::translate(const Vector2<float>& v)
 {
 	setPosition(m_position + v);
 }
@@ -41,9 +41,9 @@ void Environment::LocalizedEntity::setRadius(float radius)
 	m_environment->addEntity(this);
 }
 
-void Environment::removeEntity(LocalizedEntity * entity)
+void Environment::removeEntity(LocalizedEntity* entity)
 {
-	auto function = [this, entity](const Vector2<unsigned int> & cell)
+	auto function = [this, entity](const Vector2<unsigned int>& cell)
 	{
 		m_data[cell[0]][cell[1]].erase(entity);
 	};
@@ -55,9 +55,9 @@ void Environment::removeEntity(LocalizedEntity * entity)
 /// </summary>
 /// <param name="entity">The entity.</param>
 
-void Environment::addEntity(LocalizedEntity * entity)
+void Environment::addEntity(LocalizedEntity* entity)
 {
-	auto function = [this, entity](const Vector2<unsigned int> & cell)
+	auto function = [this, entity](const Vector2<unsigned int>& cell)
 	{
 		m_data[cell[0]][cell[1]].insert(entity);
 	};
@@ -66,12 +66,12 @@ void Environment::addEntity(LocalizedEntity * entity)
 
 float Environment::clampX(float x) const
 {
-	return MathUtils::clamp(0.0f, (float)m_sizeX - 0.001f, x);
+	return MathUtils::clamp(0.0f, static_cast<float>(m_sizeX) - 0.001f, x);
 }
 
 float Environment::clampY(float y) const
 {
-	return MathUtils::clamp(0.0f, (float)m_sizeY - 0.001f, y);
+	return MathUtils::clamp(0.0f, static_cast<float>(m_sizeY) - 0.001f, y);
 }
 
 Vector2<float> Environment::clamp(const Vector2<float>& p) const
@@ -85,11 +85,12 @@ bool Environment::isValid(const Vector2<unsigned int>& cell) const
 }
 
 Environment::Environment(unsigned int width, unsigned int height)
-	: m_sizeX(width), m_sizeY(height), m_data(width, ::std::vector<std::set<LocalizedEntity*> >(height))
-{}
+	: m_sizeX(width), m_sizeY(height), m_data(width, ::std::vector<std::set<LocalizedEntity*>>(height))
+{
+}
 
-Vector2<unsigned int> Environment::cell(Vector2<float> const & position) const
+Vector2<unsigned int> Environment::cell(const Vector2<float>& position) const
 {
 	Vector2<float> clamped = clamp(position);
-	return Vector2<unsigned int>((unsigned int)clamped[0], (unsigned int)clamped[1]);
+	return Vector2<unsigned int>(static_cast<unsigned int>(clamped[0]), static_cast<unsigned int>(clamped[1]));
 }

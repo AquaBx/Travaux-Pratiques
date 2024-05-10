@@ -13,8 +13,7 @@
 #include "signal_constant.h"
 #include <iostream>
 
-void
-q2_signal_constant()
+void q2_signal_constant()
 {
 	signal_constant constant(0.5);
 	enregistreur_fichier_texte enregistreur("02_constant.txt", 1);
@@ -27,9 +26,14 @@ q2_signal_constant()
 	}
 }
 
+<<<<<<< Updated upstream
 
 void
 q4_harmonique()
+=======
+/*
+void q4_harmonique()
+>>>>>>> Stashed changes
 {
 
 	harmonique la440(440); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
@@ -56,17 +60,22 @@ q4_harmonique()
   }
 
 }
+<<<<<<< Updated upstream
 
 int
 main()
+=======
+*/
+
+int main()
+>>>>>>> Stashed changes
 {
 	q2_signal_constant();
 	q4_harmonique();
 	return 0;
 }
 
-int
-WinMain()
+int WinMain()
 {
 	return main();
 }

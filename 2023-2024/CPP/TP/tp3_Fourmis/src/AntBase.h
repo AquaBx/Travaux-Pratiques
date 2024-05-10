@@ -1,9 +1,8 @@
-#ifndef _AntBase_H
+﻿#ifndef _AntBase_H
 #define _AntBase_H
 
 #include <Agent.h>
 #include <Environment.h>
-#include <set>
 #include <Renderer.h>
 #include <Timer.h>
 #include <MathUtils.h>
@@ -11,75 +10,121 @@
 #include <Anthill.h>
 
 
-class AntBase : public Agent {
+class AntBase : public Agent
+{
+protected:
+	Anthill* const fourmilliere;
+	float vitesse;
+	float lifetime;
+	float ptac = 5;
 
-	protected:
-	    Anthill * const fourmilliere;
-	    float vitesse;
-	    float lifetime;
-	    float ptac=5;
+	float life = 0;
+	float poids = 0;
 
-	    float life=0;
-	    float poids=0;
+	Vector2<float> direction;
 
-	    Vector2<float> direction;
+public:
+	AntBase(Environment* env, Anthill* fourmilliere, Vector2<float> direction, float vitesse = 1)
+		: Agent(env, fourmilliere->getPosition()[0], fourmilliere->getPosition()[1]), fourmilliere(fourmilliere),
+		  vitesse(vitesse), direction(direction)
+	{
+		lifetime = MathUtils::random(1000, 2500);
+	}
 
-    public:
+	// retourne le poids actuel
+	float getPoids()
+	{
+		return poids;
+	}
 
-        AntBase(Environment * env, Anthill * fourmilliere,Vector2<float> direction,float vitesse=1)
-            : Agent( env, fourmilliere->getPosition()[0], fourmilliere->getPosition()[1]), fourmilliere(fourmilliere) , vitesse(vitesse) , direction(direction)
-        {
-        	lifetime = MathUtils::random(1000, 2500);
-        }
+	// avancer
+	void forward()
+	{
+		setPosition(getPosition() + direction * vitesse * Timer::dt());
+	}
 
+	// rotate d'un angle
+	void rotate(float angle)
+	{
+		direction = direction.rotate(angle);
+	}
 
-        void forward() {
-            setPosition(getPosition() + direction * vitesse * Timer::dt());
-        }
+	// un demi tour x)
+	void demitour()
+	{
+		rotate(180);
+	}
 
-        void rotate(float angle) {
-            direction = direction.rotate(angle);
-        }
+	// regarde vers un agent
+	void lookAt(Agent& obj)
+	{
+		direction = (obj.getPosition() - getPosition()).normalized();
+	}
 
-        void demitour() {
-            rotate(180);
-        }
+	// depose dans la fourmillière
+	// ⚠️ il faut vérifier que la fourmi est bien sur la fourmillère
+	void deposit()
+	{
+		fourmilliere->depositFood(poids);
+		poids = 0;
+	}
 
-        void lookAt(Agent & obj) {
-            direction = (obj.getPosition() - getPosition()).normalized();
-        }
+	// affiche le cercle de la fourmi
+	void render()
+	{
+		Renderer::Color color = poids == 0 ? Renderer::Color(255, 255, 255, 255) : Renderer::Color(128, 255, 128, 255);
+		(Renderer::getInstance())->drawCircle(getPosition(), getRadius(), color);
+	}
 
-        void deposit() {
-            fourmilliere->depositFood(poids);
-            poids = 0;
-        }
+	// vérifie si la fourmi, est vivante, sinon ça la tue
+	void checkAlive()
+	{
+		if (lifetime <= life)
+		{
+			this->setStatus(destroy);
+		}
+	}
 
-        std::vector<Food*> perceivedObjects() const {
-            return LocalizedEntity::perceive<Food>(direction, MathUtils::pi / 2, 3.0);
-        }
+	// cherche une food en face de la fourmi
+	Food* chooseFood() const
+	{
+		std::vector<Food*> foods = perceive<Food>(direction, MathUtils::pi / 2, 3.0);
 
-        void checkAndDepose()
-        {
-            Vector2<float> d = fourmilliere->getPosition() - getPosition();
+		if (foods.size() == 0) return nullptr;
 
-            if (d[0] * d[0] + d[1] * d[1] <= fourmilliere->getRadius()) {
-                deposit();
-                life = 0;
-            }
-        }
+		return foods.at(0);
+	}
 
-		void render()
-        {
-            Renderer::Color color = poids == 0 ? Renderer::Color(255, 255, 255, 255) : Renderer::Color(128, 255, 128, 255);
-            (Renderer::getInstance())->drawCircle(getPosition(), getRadius(), color);
-        }
+	// vérifie si la fourmi est sur un agent
+	bool onAgent(Agent* agent) const
+	{
+		float d = agent->getPosition().distance(getPosition());
+		return d < agent->getRadius();
+	}
 
-		void checkAlive()
-        {
-	        if (lifetime <= life) {
-	            this->setStatus(destroy);
-	        }
-        }
+	// collecte de la nourriture sur l'agent mis en paramètre
+	void collectFromFood(Food* food)
+	{
+		poids += food->collectFood(ptac);
+	}
+
+	// rotate random	
+	void rotateRandom()
+	{
+		rotate(MathUtils::random(-MathUtils::pi / 10 * Timer::dt(), MathUtils::pi / 10 * Timer::dt()));
+	}
+
+	// récupère la fourmillère
+	Anthill* getFourmilliere()
+	{
+		return fourmilliere;
+	}
+
+	// reset de la vie de la fourmi
+	void resetLife()
+	{
+		life = 0;
+	}
 };
 
 #endif
