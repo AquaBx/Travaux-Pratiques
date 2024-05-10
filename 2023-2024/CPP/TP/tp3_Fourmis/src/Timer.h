@@ -11,7 +11,6 @@ protected:
 	static float m_deltaTime;
 
 public:
-	
 	/// <summary>
 	/// Returns the absolute time since the beginning of the simulation.
 	/// </summary>
@@ -20,7 +19,7 @@ public:
 	{
 		return m_currentTime;
 	}
-	
+
 	/// <summary>
 	/// Returns the time elapsed since the last time step.
 	/// </summary>
@@ -29,7 +28,7 @@ public:
 	{
 		return m_deltaTime;
 	}
-	
+
 	/// <summary>
 	/// Updates the time with specified time step duration.
 	/// </summary>

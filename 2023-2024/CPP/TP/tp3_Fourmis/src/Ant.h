@@ -4,69 +4,73 @@
 #include <AntBasePheromone.h>
 #include <Anthill.h>
 #include <Environment.h>
-#include <Renderer.h>
-#include <set>
 
-class Ant : public AntBasePheromone {
-
-    float stock = 0;
-
-
+class Ant : public AntBasePheromone
+{
 public:
+	Ant(Environment* env, Anthill* fourmilliere) : AntBasePheromone(env, fourmilliere)
+	{
+	}
 
-    Ant(Environment* env, Anthill * fourmilliere) : AntBasePheromone(env, fourmilliere) {}
+	void update() override
+	{
+		checkAlive();
 
-    void update() {
+		Pheromone* choosed = choosePheromone();
 
-        checkAlive();
+		if (poids == 0.0)
+		{
+			Food* food = chooseFood();
 
-        Pheromone* choosed = choosePheromone();
+			if (food != nullptr)
+			{
+				lookAt(*food);
 
+				if (onAgent(food))
+				{
+					collectFromFood(food);
+				}
+			}
+			else if (choosed != nullptr)
+			{
+				lookAt(*choosed);
+			}
+			else
+			{
+				rotateRandom();
+			}
+		}
+		else
+		{
+			if (onAgent(fourmilliere))
+			{
+				deposit();
+			}
+			else if (choosed != nullptr)
+			{
+				lookAt(*choosed);
+			}
+			else
+			{
+				lookAt(*fourmilliere);
+			}
+		}
 
-        if (poids == 0) {
-            putPheromone(10);
+		forward();
 
-            std::vector<Food*> perceivedObjectsRetour = perceivedObjects();
+		if (getPoids() == 0.0)
+		{
+			putPheromone(10);
+		}
+		else
+		{
+			putPheromone(100);
+		}
 
-            if (perceivedObjectsRetour.size() > 0) {
+		render();
 
-                lookAt(*perceivedObjectsRetour.at(0));
-
-                Vector2<float> d = perceivedObjectsRetour.at(0)->getPosition() - getPosition();
-
-                if (d[0] * d[0] + d[1] * d[1] <= perceivedObjectsRetour.at(0)->getRadius()) {
-                    poids += perceivedObjectsRetour.at(0)->collectFood(ptac);
-                }
-            }
-            else if (choosed != nullptr) {
-                lookAt(*choosed);
-            }
-            else
-            {
-                rotate(MathUtils::random(-MathUtils::pi / 10 * Timer::dt(), MathUtils::pi / 10 * Timer::dt()));
-            }
-        }
-        else {
-            putPheromone(100);
-
-            if (choosed != nullptr) {
-                lookAt(*choosed);
-            }
-            else
-            {
-                lookAt(*fourmilliere);
-            }
-
-        }
-
-        checkAndDepose();
-
-        forward();
-
-        render();
-
-        life += Timer::dt();
-    }
+		life += Timer::dt();
+	}
 };
 
 #endif
