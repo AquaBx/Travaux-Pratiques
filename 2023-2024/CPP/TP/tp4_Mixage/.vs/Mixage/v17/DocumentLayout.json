@@ -1,10 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\GitRepo\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\",
+  "WorkspaceRootPath": "C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{17550EBF-F686-4C75-9239-95ECF8583650}|Mixage.vcxproj|E:\\GitRepo\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{17550EBF-F686-4C75-9239-95ECF8583650}|Mixage.vcxproj|C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{17550EBF-F686-4C75-9239-95ECF8583650}|Mixage.vcxproj|solutionrelative:src\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17550EBF-F686-4C75-9239-95ECF8583650}|Mixage.vcxproj|C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\include\\producteur_base.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{17550EBF-F686-4C75-9239-95ECF8583650}|Mixage.vcxproj|solutionrelative:include\\producteur_base.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17550EBF-F686-4C75-9239-95ECF8583650}|Mixage.vcxproj|C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\include\\consommateur_base.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{17550EBF-F686-4C75-9239-95ECF8583650}|Mixage.vcxproj|solutionrelative:include\\consommateur_base.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{17550EBF-F686-4C75-9239-95ECF8583650}|Mixage.vcxproj|C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\include\\multiplicateur.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{17550EBF-F686-4C75-9239-95ECF8583650}|Mixage.vcxproj|solutionrelative:include\\multiplicateur.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,19 +26,58 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "consommateur_base.h",
+              "DocumentMoniker": "C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\include\\consommateur_base.h",
+              "RelativeDocumentMoniker": "include\\consommateur_base.h",
+              "ToolTip": "C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\include\\consommateur_base.h",
+              "RelativeToolTip": "include\\consommateur_base.h",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACcAAAAoAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-07T09:05:47.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "producteur_base.h",
+              "DocumentMoniker": "C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\include\\producteur_base.h",
+              "RelativeDocumentMoniker": "include\\producteur_base.h",
+              "ToolTip": "C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\include\\producteur_base.h",
+              "RelativeToolTip": "include\\producteur_base.h",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABIAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-07T09:02:09.915Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "main.cpp",
-              "DocumentMoniker": "E:\\GitRepo\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\src\\main.cpp",
+              "DocumentMoniker": "C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\src\\main.cpp",
               "RelativeDocumentMoniker": "src\\main.cpp",
-              "ToolTip": "E:\\GitRepo\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\src\\main.cpp",
+              "ToolTip": "C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\src\\main.cpp",
               "RelativeToolTip": "src\\main.cpp",
-              "ViewState": "AQIAAB0AAAAAAAAAAAAcwDEAAAADAAAA",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAAACIAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-04-30T13:42:10.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "multiplicateur.h",
+              "DocumentMoniker": "C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\include\\multiplicateur.h",
+              "RelativeDocumentMoniker": "include\\multiplicateur.h",
+              "ToolTip": "C:\\GitHub\\Travaux-Pratiques\\2023-2024\\CPP\\TP\\tp4_Mixage\\include\\multiplicateur.h",
+              "RelativeToolTip": "include\\multiplicateur.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAaAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-05-07T08:39:12.12Z",
               "EditorCaption": ""
             }
           ]

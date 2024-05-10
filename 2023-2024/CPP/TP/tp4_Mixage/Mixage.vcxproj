@@ -134,17 +134,21 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="enregistreur_fichier_wav.h" />
     <ClInclude Include="include\composant.h" />
     <ClInclude Include="include\composant_exception.h" />
     <ClInclude Include="include\consommateur.h" />
+    <ClInclude Include="include\consommateur_base.h" />
     <ClInclude Include="include\constantes.h" />
     <ClInclude Include="include\enregistreur_fichier.h" />
     <ClInclude Include="include\enregistreur_fichier_texte.h" />
     <ClInclude Include="include\filtre.h" />
+    <ClInclude Include="include\filtre_base.h" />
     <ClInclude Include="include\flot.h" />
+    <ClInclude Include="include\harmonique.h" />
     <ClInclude Include="include\imp_flot.h" />
+    <ClInclude Include="include\multiplicateur.h" />
     <ClInclude Include="include\producteur.h" />
+    <ClInclude Include="include\producteur_base.h" />
     <ClInclude Include="include\signal_constant.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

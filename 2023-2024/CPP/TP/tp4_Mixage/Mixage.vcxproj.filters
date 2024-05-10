@@ -20,9 +20,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="enregistreur_fichier_wav.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\composant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -30,6 +27,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\consommateur.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\consommateur_base.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\constantes.h">
@@ -44,13 +44,25 @@
     <ClInclude Include="include\filtre.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\filtre_base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\flot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\harmonique.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imp_flot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\multiplicateur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\producteur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\imp_flot.h">
+    <ClInclude Include="include\producteur_base.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\signal_constant.h">
