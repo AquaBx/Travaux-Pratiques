@@ -1,6 +1,6 @@
 #pragma once
 
-#include "consommateur.h";
+#include "consommateur.h"
 
 
 #pragma once

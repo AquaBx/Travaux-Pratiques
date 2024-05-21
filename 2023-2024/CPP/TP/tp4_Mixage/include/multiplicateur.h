@@ -15,8 +15,12 @@ class multiplicateur : public filtre_base {
 
 		void calculer() override {
 			if (yaDesEchantillons()) {
-				double calcul = m_lesEntrees[0]->extraire() * m_lesEntrees[1]->extraire();
-				m_lesSorties[0]->inserer(calcul);
+				double a = m_lesEntrees[0]->extraire();
+				double b = m_lesEntrees[1]->extraire();
+
+				double c = a * b;
+
+				m_lesSorties[0]->inserer(c);
 			}
 		}
 

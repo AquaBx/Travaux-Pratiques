@@ -19,7 +19,7 @@ class harmonique : public producteur_base
 
 		void calculer() override
 		{
-			double calcul = sin(static_cast<float>(i) / MixageSonore::frequency * 2.0 * MixageSonore::pi * f + phi);
+			double calcul = sin(static_cast<double>(i) / MixageSonore::frequency * 2.0 * MixageSonore::pi * f + phi);
 			m_lesSorties[0]->inserer(calcul);
 			i += 1;
 		};
