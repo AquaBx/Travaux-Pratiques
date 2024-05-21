@@ -147,9 +147,11 @@
     <ClInclude Include="include\harmonique.h" />
     <ClInclude Include="include\imp_flot.h" />
     <ClInclude Include="include\multiplicateur.h" />
+    <ClInclude Include="include\operationBinaire.h" />
     <ClInclude Include="include\producteur.h" />
     <ClInclude Include="include\producteur_base.h" />
     <ClInclude Include="include\signal_constant.h" />
+    <ClInclude Include="include\volume.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

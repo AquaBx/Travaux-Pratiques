@@ -68,5 +68,11 @@
     <ClInclude Include="include\signal_constant.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\operationBinaire.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\volume.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

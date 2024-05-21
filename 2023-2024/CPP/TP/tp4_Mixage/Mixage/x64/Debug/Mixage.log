@@ -1,13 +1,4 @@
 ﻿  main.cpp
-<<<<<<< Updated upstream
-C:\GitHub\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\include\consommateur_base.h(3,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  (compiling source file 'src/main.cpp')
-  
 LibOutils.lib(enregistreur_fichier.obj) : warning LNK4099: PDB '' was not found with 'LibOutils.lib(enregistreur_fichier.obj)' or at ''; linking object as if no debug info
 LibOutils.lib(enregistreur_fichier_texte.obj) : warning LNK4099: PDB '' was not found with 'LibOutils.lib(enregistreur_fichier_texte.obj)' or at ''; linking object as if no debug info
   Mixage.vcxproj -> C:\GitHub\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\x64\Debug\Mixage.exe
-=======
-LibOutils.lib(enregistreur_fichier_texte.obj) : warning LNK4099: PDB '' n'a pu être trouvé avec 'LibOutils.lib(enregistreur_fichier_texte.obj)' ou sur '' ; l'objet sera lié sans informations de débogage
-MSVCRTD.lib(exe_winmain.obj) : error LNK2019: symbole externe non résolu WinMain référencé dans la fonction "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\x64\Debug\Mixage.exe : fatal error LNK1120: 1 externes non résolus
->>>>>>> Stashed changes
