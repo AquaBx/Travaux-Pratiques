@@ -1,4 +1,13 @@
 ﻿  main.cpp
-LibOutils.lib(enregistreur_fichier.obj) : warning LNK4099: PDB '' was not found with 'LibOutils.lib(enregistreur_fichier.obj)' or at ''; linking object as if no debug info
-LibOutils.lib(enregistreur_fichier_texte.obj) : warning LNK4099: PDB '' was not found with 'LibOutils.lib(enregistreur_fichier_texte.obj)' or at ''; linking object as if no debug info
-  Mixage.vcxproj -> C:\GitHub\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\x64\Debug\Mixage.exe
+E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\src\filtre_compose.h(42,29): warning C4267: 'return' : conversion de 'size_t' en 'unsigned int', perte possible de données
+  (compiler le fichier source 'src/main.cpp')
+  
+E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\src\additionneur.h(17,23): warning C4018: '<' : incompatibilité signed/unsigned
+  (compiler le fichier source 'src/main.cpp')
+  
+E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\src\main.cpp(133,24): warning C4305: 'argument' : troncation de 'double' à '_Ty'
+E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\src\main.cpp(133,24): warning C4305:         with
+E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\src\main.cpp(133,24): warning C4305:         [
+E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\src\main.cpp(133,24): warning C4305:             _Ty=float
+E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\src\main.cpp(133,24): warning C4305:         ]
+  Mixage.vcxproj -> E:\GitRepo\Travaux-Pratiques\2023-2024\CPP\TP\tp4_Mixage\x64\Debug\Mixage.exe

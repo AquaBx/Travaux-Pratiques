@@ -29,9 +29,6 @@
     <ClInclude Include="include\consommateur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\consommateur_base.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\constantes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -44,35 +41,50 @@
     <ClInclude Include="include\filtre.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\filtre_base.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\flot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\harmonique.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\imp_flot.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\multiplicateur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\producteur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\producteur_base.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\imp_flot.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\signal_constant.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\multiplicateur.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\operationBinaire.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\operationBinaire.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\volume.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\producteur_base.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\signal_constant.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\volume.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\consommateur_base.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filtre_base.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\harmonique.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\filtre_compose.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\volume_compose.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\mixeur.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\additionneur.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
