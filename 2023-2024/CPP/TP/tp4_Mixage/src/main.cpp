@@ -13,6 +13,9 @@
 #include "signal_constant.h"
 #include "operationBinaire.h"
 #include "volume.h"
+#include "mixeur.h"
+#include <vector>
+#include "volume_compose.h"
 #include <iostream>
 
 void q2_signal_constant() {
@@ -50,13 +53,10 @@ void q8_harmonique() {
 
 	enregistreur_fichier enregistreur("08_multiply.raw", 1);	// fichier mono
 
-	auto sortie1 = la440.getSortie(0);
-	multiplicat.connecterEntree(sortie1, 0);
-	auto sortie2 = la880.getSortie(0);
-	multiplicat.connecterEntree(sortie2, 1);
+	multiplicat.connecterEntree(la440.getSortie(0), 0);
+	multiplicat.connecterEntree(la880.getSortie(0), 1);
 
-	auto sortie = sortie2;
-	enregistreur.connecterEntree(sortie, 0);
+	enregistreur.connecterEntree(multiplicat.getSortie(0), 0);
 	// produire 2 secondes de son
 	for (unsigned long int i = 0; i < 2 * MixageSonore::frequency; ++i) {
 		la440.calculer();
@@ -74,13 +74,10 @@ void q10_harmonique() {
 
 	enregistreur_fichier enregistreur("10_multiply.raw", 1);	// fichier mono
 
-	auto sortie1 = la440.getSortie(0);
-	multiplicat.connecterEntree(sortie1, 0);
-	auto sortie2 = la880.getSortie(0);
-	multiplicat.connecterEntree(sortie2, 1);
+	multiplicat.connecterEntree(la440.getSortie(0), 0);
+	multiplicat.connecterEntree(la880.getSortie(0), 1);
 
-	auto sortie = sortie2;
-	enregistreur.connecterEntree(sortie, 0);
+	enregistreur.connecterEntree(multiplicat.getSortie(0), 0);
 	// produire 2 secondes de son
 	for (unsigned long int i = 0; i < 2 * MixageSonore::frequency; ++i) {
 		la440.calculer();
@@ -92,16 +89,29 @@ void q10_harmonique() {
 
 void q12_harmonique() {
 	harmonique la440(440); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
-	volume leVolume(5);
+	volume leVolume(0.1);
 
 	enregistreur_fichier enregistreur("12_harmonique.raw", 1);	// fichier mono
 
-	auto sortie = la440.getSortie(0);
-	leVolume.connecterEntree(sortie, 1);
+	leVolume.connecterEntree(la440.getSortie(0), 1);
+	enregistreur.connecterEntree(leVolume.getSortie(0), 0);
 
-	auto sortie2 = leVolume.getSortie(0);
-	enregistreur.connecterEntree(sortie2, 0);
+	// produire 2 secondes de son
+	for (unsigned long int i = 0; i < 2 * MixageSonore::frequency; ++i) {
+		la440.calculer();
+		leVolume.calculer();
+		enregistreur.calculer();
+	}
+}
 
+void q14_harmonique() {
+	harmonique la440(440); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
+
+	volume_compose leVolume(0.1);
+	leVolume.connecterEntree(la440.getSortie(0), 0);
+
+	enregistreur_fichier enregistreur("14_harmonique.raw", 1);
+	enregistreur.connecterEntree(leVolume.getSortie(0), 0);
 
 	// produire 2 secondes de son
 	for (unsigned long int i = 0; i < 2 * MixageSonore::frequency; ++i) {
@@ -112,6 +122,33 @@ void q12_harmonique() {
 
 }
 
+void q16_harmonique() {
+	harmonique la440(440); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
+	harmonique la880(880); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
+	harmonique la900(900); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
+
+	std::vector<float> les_volumes;
+	les_volumes.push_back(0.5);
+	les_volumes.push_back(1);
+	les_volumes.push_back(0.3);
+
+	mixeur le_mixeur(3, les_volumes);
+	le_mixeur.connecterEntree(la440.getSortie(0), 0);
+	le_mixeur.connecterEntree(la880.getSortie(0), 1);
+	le_mixeur.connecterEntree(la900.getSortie(0), 2);
+
+	enregistreur_fichier enregistreur("16_harmonique.raw", 1);
+	enregistreur.connecterEntree(le_mixeur.getSortie(0), 0);
+
+	// produire 2 secondes de son
+	for (unsigned long int i = 0; i < 2 * MixageSonore::frequency; ++i) {
+		la440.calculer();
+		la880.calculer();
+		la900.calculer();
+		le_mixeur.calculer();
+		enregistreur.calculer();
+	}
+}
 
 int main() {
 	q2_signal_constant();
@@ -119,6 +156,8 @@ int main() {
 	q8_harmonique();
 	q10_harmonique();
 	q12_harmonique();
+	q14_harmonique();
+	q16_harmonique();
 
 	return 0;
 }
