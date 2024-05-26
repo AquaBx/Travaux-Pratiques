@@ -7,16 +7,20 @@ class producteur_base : public virtual producteur
     
 protected:
     std::shared_ptr<flot> * m_lesSorties;
-    int sorties = 0;
+    unsigned int sorties = 0;
 
 public:
     unsigned int nbSorties() const override {
         return sorties;
     }
 
-    producteur_base(unsigned int size)
+    producteur_base(unsigned int size): sorties(size)
     {
         m_lesSorties = new std::shared_ptr<flot>[size];
+
+        for (int i = 0; i < size; i++) {
+            connecterSortie(std::make_shared<imp_flot>(), i);
+        }
     }
 
     producteur_base(const producteur_base & old )
@@ -41,7 +45,6 @@ public:
 
     void connecterSortie(const std::shared_ptr<flot>& f, unsigned int numsortie)  {
         m_lesSorties[numsortie] = f;
-        sorties++;
     }
 
     const std::shared_ptr<flot>& getSortie(unsigned int numsortie) const override {

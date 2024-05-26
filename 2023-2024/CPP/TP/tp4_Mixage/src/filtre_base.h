@@ -7,17 +7,17 @@ class filtre_base : public filtre, public consommateur_base , public producteur_
 public :
 	filtre_base(unsigned int nbentrees, unsigned int nbsorties): consommateur_base(nbentrees), producteur_base(nbsorties) {}
 
-	unsigned int nbSorties() const override{
+	/*unsigned int nbSorties() const override{
 		return producteur_base::nbSorties();
-	}
+	}*/
 
 	const std::shared_ptr<flot>& getSortie(unsigned int numsortie) const override {
 		return producteur_base::getSortie(numsortie);
 	}
 
-	unsigned int nbEntrees() const override  {
+	/*unsigned int nbEntrees() const override  {
 		return consommateur_base::nbEntrees();
-	}
+	}*/
 
 	const std::shared_ptr<flot>& getEntree(unsigned int numentree) const override {
 		return consommateur_base::getEntree(numentree);

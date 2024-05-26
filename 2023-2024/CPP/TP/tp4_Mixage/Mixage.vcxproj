@@ -149,6 +149,7 @@
     <ClInclude Include="src\filtre_compose.h" />
     <ClInclude Include="src\harmonique.h" />
     <ClInclude Include="src\imp_flot.h" />
+    <ClInclude Include="src\lecteur_fichier.h" />
     <ClInclude Include="src\mixeur.h" />
     <ClInclude Include="src\multiplicateur.h" />
     <ClInclude Include="src\operationBinaire.h" />
