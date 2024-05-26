@@ -1,6 +1,5 @@
 #pragma once
 #include "producteur_base.h"
-#include "imp_flot.h"
 #include "constantes.h"
 
 class harmonique : public producteur_base
@@ -13,9 +12,7 @@ class harmonique : public producteur_base
 
 	public:
 		harmonique(double f, double phi = 0) : producteur_base(1), phi(phi), f(f)
-		{
-			connecterSortie(std::make_shared<imp_flot>(),0);
-		}
+		{}
 
 		void calculer() override
 		{

@@ -11,7 +11,6 @@ protected:
 
 public:
 	operationBinaire() : filtre_base(2, 1) {
-		connecterSortie(std::make_shared<imp_flot>(), 0);
 	}
 
 	void calculer() override {

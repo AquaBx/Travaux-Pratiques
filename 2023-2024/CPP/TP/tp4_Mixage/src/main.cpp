@@ -17,6 +17,8 @@
 #include <vector>
 #include "volume_compose.h"
 #include <iostream>
+#include "lecteur_fichier.h"
+
 
 void q2_signal_constant() {
 	signal_constant constant(0.5);
@@ -150,7 +152,21 @@ void q16_harmonique() {
 	}
 }
 
+void q17_harmonique() {
+	lecteur_fichier mon_fichier("./raw/mono.raw",1); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
+
+	enregistreur_fichier enregistreur("17_harmonique.raw", 1);
+	enregistreur.connecterEntree(mon_fichier.getSortie(0), 0);
+
+	// produire 2 secondes de son
+	while (!mon_fichier.isEndFile()) {
+		mon_fichier.calculer();
+		enregistreur.calculer();
+	}
+}
+
 int main() {
+
 	q2_signal_constant();
 	q4_harmonique();
 	q8_harmonique();
@@ -158,7 +174,7 @@ int main() {
 	q12_harmonique();
 	q14_harmonique();
 	q16_harmonique();
-
+	q17_harmonique();
 	return 0;
 }
 
