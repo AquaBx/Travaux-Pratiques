@@ -17,6 +17,8 @@
 #include <vector>
 #include "volume_compose.h"
 #include <iostream>
+
+#include "enregistreur_fichier_wav.h"
 #include "lecteur_fichier.h"
 
 
@@ -34,7 +36,7 @@ void q2_signal_constant() {
 void q4_harmonique() {
 	harmonique la440(440); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
 
-	enregistreur_fichier enregistreur("04_harmonique.raw", 1);	// fichier mono
+	enregistreur_fichier_wav enregistreur("04_harmonique.wav", 1);	// fichier mono
 
 	auto sortie = la440.getSortie(0);
 	enregistreur.connecterEntree(sortie, 0);

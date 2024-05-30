@@ -89,5 +89,8 @@
     <ClInclude Include="src\lecteur_fichier.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\enregistreur_fichier_wav.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
