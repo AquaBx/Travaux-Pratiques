@@ -18,8 +18,10 @@
 #include "volume_compose.h"
 #include <iostream>
 
-#include "enregistreur_fichier_wav.h"
+#include "fadein.h"
+#include "fadeout.h"
 #include "lecteur_fichier.h"
+#include "panning.h"
 
 
 void q2_signal_constant() {
@@ -36,7 +38,7 @@ void q2_signal_constant() {
 void q4_harmonique() {
 	harmonique la440(440); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
 
-	enregistreur_fichier_wav enregistreur("04_harmonique.wav", 1);	// fichier mono
+	enregistreur_fichier enregistreur("04_harmonique.raw", 1);	// fichier mono
 
 	auto sortie = la440.getSortie(0);
 	enregistreur.connecterEntree(sortie, 0);
@@ -134,7 +136,7 @@ void q16_harmonique() {
 	std::vector<float> les_volumes;
 	les_volumes.push_back(0.5);
 	les_volumes.push_back(1);
-	les_volumes.push_back(0.3);
+	les_volumes.push_back(0.3f);
 
 	mixeur le_mixeur(3, les_volumes);
 	le_mixeur.connecterEntree(la440.getSortie(0), 0);
@@ -155,10 +157,11 @@ void q16_harmonique() {
 }
 
 void q17_harmonique() {
-	lecteur_fichier mon_fichier("./raw/mono.raw",1); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
+	lecteur_fichier mon_fichier("./raw/stereo.raw", 2);
 
-	enregistreur_fichier enregistreur("17_harmonique.raw", 1);
+	enregistreur_fichier enregistreur("17_harmonique.raw", 2);
 	enregistreur.connecterEntree(mon_fichier.getSortie(0), 0);
+	enregistreur.connecterEntree(mon_fichier.getSortie(1), 1);
 
 	// produire 2 secondes de son
 	while (!mon_fichier.isEndFile()) {
@@ -166,6 +169,54 @@ void q17_harmonique() {
 		enregistreur.calculer();
 	}
 }
+
+void fade_f() {
+	harmonique la440(440); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
+
+	fadein fade1(0, 24000);
+	fadeout fade2(64200,88200);
+
+	enregistreur_fichier enregistreur("fadeinout.raw", 1);	// fichier mono
+
+	fade1.connecterEntree(la440.getSortie(0), 0);
+	fade2.connecterEntree(fade1.getSortie(0), 0);
+	enregistreur.connecterEntree(fade2.getSortie(0), 0);
+
+	// produire 2 secondes de son
+	for (unsigned long int i = 0; i < 2 * MixageSonore::frequency; ++i) {
+		la440.calculer();
+		fade1.calculer();
+		fade2.calculer();
+		enregistreur.calculer();
+	}
+}
+
+void panning_f() {
+	harmonique sin(1); // la 440Hz (voir fr.wikipedia.org/wiki/Note_de_musique)
+	lecteur_fichier mon_fichier1("./raw/stereo.raw", 2);
+	lecteur_fichier mon_fichier2("./raw/stereo.raw", 2);
+
+	panning pan;
+
+	pan.connecterEntree(sin.getSortie(0), 0);
+	pan.connecterEntree(mon_fichier1.getSortie(0), 1);
+	pan.connecterEntree(mon_fichier2.getSortie(0), 2);
+
+	enregistreur_fichier enregistreur("panning.raw", 2);	// fichier mono
+
+	enregistreur.connecterEntree(pan.getSortie(0), 0);
+	enregistreur.connecterEntree(pan.getSortie(1), 1);
+
+	// produire 2 secondes de son
+	while (!mon_fichier1.isEndFile()) {
+		sin.calculer();
+		mon_fichier1.calculer();
+		mon_fichier2.calculer();
+		pan.calculer();
+		enregistreur.calculer();
+	}
+}
+
 
 int main() {
 
@@ -177,6 +228,8 @@ int main() {
 	q14_harmonique();
 	q16_harmonique();
 	q17_harmonique();
+	fade_f();
+	panning_f();
 	return 0;
 }
 
