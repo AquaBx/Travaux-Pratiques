@@ -2,18 +2,15 @@
 #include "producteur.h"
 #include "imp_flot.h"
 
+// un signal constant
 class signal_constant : public producteur
 {
-
-private:
-	std::shared_ptr<flot> flotSortie;
 	double entree;
+	std::shared_ptr<flot> flotSortie;
 
 public:
-
-	signal_constant(double entree) : entree(entree)
+	signal_constant(const double entree) : entree(entree), flotSortie(std::make_shared<imp_flot>())
 	{
-		flotSortie = std::make_shared<imp_flot>();
 	}
 
 	~signal_constant() override = default;
@@ -31,5 +28,5 @@ public:
 	void calculer() override
 	{
 		flotSortie->inserer(entree);
-	};
+	}
 };

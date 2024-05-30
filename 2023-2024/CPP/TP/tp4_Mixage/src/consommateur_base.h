@@ -1,54 +1,82 @@
 #pragma once
 
 #include "consommateur.h"
-#include "imp_flot.h"
 
-class consommateur_base : public virtual consommateur {
+/*
 
+implémentation de consommateur
+
+ */
+class consommateur_base : public virtual consommateur
+{
 protected:
-    std::shared_ptr<flot>* m_lesEntrees;
-    unsigned int entrees = 0;
+	unsigned int entrees = 0;
+	std::shared_ptr<flot>* m_lesEntrees;
 
 public:
-    unsigned int nbEntrees() const override {
-        return entrees;
-    }
+	//renvoie le nombre d'entrées
+	unsigned int nbEntrees() const override
+	{
+		return entrees;
+	}
 
-    consommateur_base(unsigned int size): entrees(size)
-    {
-        m_lesEntrees = new std::shared_ptr<flot>[size];
+	//constructeur
+	consommateur_base(unsigned int size): entrees(size), m_lesEntrees(new std::shared_ptr<flot>[size])
+	{
+	}
 
-    }
+	// constructeur de copie
+	consommateur_base(const consommateur_base& old)
+	{
+		m_lesEntrees = new std::shared_ptr<flot>[old.entrees];
 
-    consommateur_base(const consommateur_base& old)
-    {
-        this->m_lesEntrees = old.m_lesEntrees;
-    }
+		entrees = old.nbEntrees();
 
-    consommateur_base& operator= (const consommateur_base& old)
-    {
-        if (this == &old) {
-            return (*this);
-        }
+		for (unsigned int i = 0; i < old.nbEntrees(); i++)
+		{
+			this->m_lesEntrees[i] = old.m_lesEntrees[i];
+		}
+	}
 
-        this->m_lesEntrees = old.m_lesEntrees;
+	// operateur d'affectation
+	consommateur_base& operator=(const consommateur_base& old)
+	{
+		if (this == &old)
+		{
+			return (*this);
+		}
 
-        return (*this);
-    }
+		entrees = old.nbEntrees();
 
-    ~consommateur_base() override {
-        delete[] m_lesEntrees;
-    }
+		for (unsigned int i = 0; i < old.nbEntrees(); i++)
+		{
+			this->m_lesEntrees[i] = old.m_lesEntrees[i];
+		}
 
-    void connecterEntree(const std::shared_ptr<flot>& f, unsigned int numentree) override {
-        m_lesEntrees[numentree] = f;
-    }
+		return *this;
+	}
 
-    const std::shared_ptr<flot>& getEntree(unsigned int numentree) const override {
-        return m_lesEntrees[numentree];
-    }
+	//destructeur
+	~consommateur_base() override
+	{
+		delete[] m_lesEntrees;
+	}
 
-    bool yaDesEchantillons() const {
-        return !m_lesEntrees[0]->vide();
-    }
+	//connecte un flot à l'indice demandé
+	void connecterEntree(const std::shared_ptr<flot>& f, unsigned int numentree) override
+	{
+		m_lesEntrees[numentree] = f;
+	}
+
+	//renvoie le s_ptr de l'entree à l'indice demandé
+	const std::shared_ptr<flot>& getEntree(unsigned int numentree) const override
+	{
+		return m_lesEntrees[numentree];
+	}
+
+	// regarde si mon premier est vide, si oui, renvoie faux, sinon renvoie vrai
+	bool yaDesEchantillons() const override
+	{
+		return !m_lesEntrees[0]->vide();
+	}
 };

@@ -2,23 +2,24 @@
 #include "producteur_base.h"
 #include "constantes.h"
 
+
+// classe harmonique, banal
 class harmonique : public producteur_base
 {
+protected:
+	double phi_;
+	double f_;
+	int i_ = 0;
 
-	protected:
-		double phi;
-		double f;
-		int i = 0;
+public:
+	harmonique(const double f, const double phi = 0) : producteur_base(1), phi_(phi), f_(f)
+	{}
 
-	public:
-		harmonique(double f, double phi = 0) : producteur_base(1), phi(phi), f(f)
-		{}
-
-		void calculer() override
-		{
-			double calcul = sin(static_cast<double>(i) / MixageSonore::frequency * 2.0 * MixageSonore::pi * f + phi);
-			m_lesSorties[0]->inserer(calcul);
-			i += 1;
-		}
-
+	void calculer() override
+	{
+		const double calcul = sin(
+			static_cast<double>(i_) / MixageSonore::frequency * 2.0 * MixageSonore::pi * f_ + phi_);
+		m_lesSorties[0]->inserer(calcul);
+		i_ += 1;
+	}
 };

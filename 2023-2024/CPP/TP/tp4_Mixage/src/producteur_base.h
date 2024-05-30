@@ -4,54 +4,78 @@
 
 class producteur_base : public virtual producteur
 {
-    
 protected:
-    std::shared_ptr<flot> * m_lesSorties;
-    unsigned int sorties = 0;
+	unsigned int sorties = 0;
+
+	std::shared_ptr<flot>* m_lesSorties;
 
 public:
-    unsigned int nbSorties() const override {
-        return sorties;
-    }
+	//renvoie le nombre de sorties
+	unsigned int nbSorties() const override
+	{
+		return sorties;
+	}
 
-    producteur_base(unsigned int size): sorties(size)
-    {
-        m_lesSorties = new std::shared_ptr<flot>[size];
+	// constructeur
+	producteur_base(const unsigned int size): sorties(size), m_lesSorties(new std::shared_ptr<flot>[size])
+	{
+		for (unsigned int i = 0; i < size; i++)
+		{
+			connecterSortie(std::make_shared<imp_flot>(), i);
+		}
+	}
 
-        for (int i = 0; i < size; i++) {
-            connecterSortie(std::make_shared<imp_flot>(), i);
-        }
-    }
+	// constructeur de copie
+	producteur_base(const producteur_base& old)
+	{
+		m_lesSorties = new std::shared_ptr<flot>[old.sorties];
 
-    producteur_base(const producteur_base & old )
-    {
-        this->m_lesSorties = old.m_lesSorties; 
-    }
+		sorties = old.nbSorties();
 
-    producteur_base & operator= (const producteur_base& old)
-    {
-        if ( this == &old ) {
-            return (*this);
-        }
+		for (unsigned int i = 0; i < old.nbSorties(); i++)
+		{
+			this->m_lesSorties[i] = old.m_lesSorties[i];
+		}
+	}
 
-        this->m_lesSorties = old.m_lesSorties;
+	// operateur d'affectation
+	producteur_base& operator=(const producteur_base& old)
+	{
+		if (this == &old)
+		{
+			return (*this);
+		}
 
-        return (*this);
-    }
+		sorties = old.nbSorties();
 
-    ~producteur_base() override {
-        delete[] m_lesSorties;
-    }
+		for (unsigned int i = 0; i < old.nbSorties(); i++)
+		{
+			this->m_lesSorties[i] = old.m_lesSorties[i];
+		}
 
-    void connecterSortie(const std::shared_ptr<flot>& f, unsigned int numsortie)  {
-        m_lesSorties[numsortie] = f;
-    }
+		return (*this);
+	}
 
-    const std::shared_ptr<flot>& getSortie(unsigned int numsortie) const override {
-        return m_lesSorties[numsortie];
-    }
+	//destructeur
+	~producteur_base() override
+	{
+		delete[] m_lesSorties;
+	}
 
-    void calculer() override {
-	    
-    }
+	//connecte un flot à l'indice demandé
+	void connecterSortie(const std::shared_ptr<flot>& f, const unsigned int numsortie) const
+	{
+		m_lesSorties[numsortie] = f;
+	}
+
+	//renvoie le s_ptr de la sortie à l'indice demandé
+	const std::shared_ptr<flot>& getSortie(const unsigned int numsortie) const override
+	{
+		return m_lesSorties[numsortie];
+	}
+
+	// methode calculer qui devra être implémenté
+	void calculer() override 
+	{
+	}
 };

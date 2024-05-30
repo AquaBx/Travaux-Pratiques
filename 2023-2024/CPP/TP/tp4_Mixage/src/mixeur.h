@@ -1,37 +1,35 @@
 ﻿#pragma once
 
-#include "signal_constant.h"
-#include "multiplicateur.h"
 #include "filtre_compose.h"
 #include "additionneur.h"
+#include "volume_compose.h"
 
-class mixeur : public filtre_compose {
-
+// le mixeur
+class mixeur : public filtre_compose
+{
 public:
-	mixeur(int n, std::vector<float> volumes) : filtre_compose(n,1){
-
-		for (int i = 0 ; i < n; i++)
+	// un beau désordre
+	mixeur(const int n, const std::vector<float>& volumes) : filtre_compose(n, 1)
+	{
+		for (int i = 0; i < n; i++) // on crée les multiplicateurs et les volumes
 		{
-			unsigned int i1 = addComponent(new signal_constant(volumes[i]));
-			unsigned int i2 = addComponent(new multiplicateur());
+			const unsigned int i1 = addComponent(new volume_compose(volumes[i]));
 
-			bindEntreeComponent(i, i2, 0); // allocation flux user -> multiplicateur
-			linkEntree(i1,i2, 0, 1 ); // connection flux signal_constant -> entree multiplicateur
-
+			bindEntreeComponent(i, i1, 0); // allocation flux user -> volume_compose
 		}
 
-		unsigned int i0 = addComponent(new additionneur(n));
+		const unsigned int i0 = addComponent(new additionneur(n)); // on crée l'additionneur
 
 		for (int i = 0; i < n; i++)
 		{
-			linkEntree(1+i*2, i0, 0, i); // connection flux multiplicateur -> entree additionneur
+			linkEntree(i, i0, 0, i); // connection flux volume_compose -> entree additionneur
 		}
 
 		bindSortieComponent(0, i0, 0); // allocation additionneur  -> sa sortie
-
 	}
 
-	void calculer() override {
+	void calculer() override
+	{
 		filtre_compose::calculer();
 	}
 };
