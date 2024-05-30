@@ -1,4 +1,0 @@
-ToolSet: 12.0 w64 (local)@C:\DevSoftware\msys\mingw64
-Options: 
-
-Options:-DCMAKE_MAKE_PROGRAM=C:/Users/Surface Pro X/AppData/Local/Programs/CLion/bin/ninja/win/aarch64/ninja.exe
