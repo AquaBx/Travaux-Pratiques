@@ -18,6 +18,8 @@
 #include "volume_compose.h"
 #include <iostream>
 
+#include "compressor.h"
+#include "echo.h"
 #include "fadein.h"
 #include "fadeout.h"
 #include "lecteur_fichier.h"
@@ -217,6 +219,53 @@ void panning_f() {
 	}
 }
 
+void compressor_f() {
+	lecteur_fichier mon_fichier1("./raw/stereo.raw", 2);
+	lecteur_fichier mon_fichier2("./raw/stereo.raw", 2);
+
+	enregistreur_fichier enregistreur("compresseur.raw", 2);
+
+	compressor compresseur1(0.5);
+	compressor compresseur2(1);
+
+	compresseur1.connecterEntree(mon_fichier1.getSortie(0), 0);
+	compresseur2.connecterEntree(mon_fichier2.getSortie(0), 0);
+
+	enregistreur.connecterEntree(compresseur1.getSortie(0), 0);
+	enregistreur.connecterEntree(compresseur2.getSortie(0), 1);
+
+	while (!mon_fichier1.isEndFile()) {
+		mon_fichier1.calculer();
+		mon_fichier2.calculer();
+		compresseur1.calculer();
+		compresseur2.calculer();
+		enregistreur.calculer();
+	}
+}
+
+void echo_f() {
+	lecteur_fichier mon_fichier1("./raw/stereo.raw", 2);
+	lecteur_fichier mon_fichier2("./raw/stereo.raw", 2);
+
+	enregistreur_fichier enregistreur("echo.raw", 2);
+
+	echo echo1(2000);
+	echo echo2(4000);
+
+	echo1.connecterEntree(mon_fichier1.getSortie(0), 0);
+	echo2.connecterEntree(mon_fichier2.getSortie(0), 0);
+
+	enregistreur.connecterEntree(echo1.getSortie(0), 0);
+	enregistreur.connecterEntree(echo2.getSortie(0), 1);
+
+	while (!mon_fichier1.isEndFile()) {
+		mon_fichier1.calculer();
+		mon_fichier2.calculer();
+		echo1.calculer();
+		echo2.calculer();
+		enregistreur.calculer();
+	}
+}
 
 int main() {
 
@@ -228,8 +277,12 @@ int main() {
 	q14_harmonique();
 	q16_harmonique();
 	q17_harmonique();
+
 	fade_f();
 	panning_f();
+	compressor_f();
+	echo_f();
+
 	return 0;
 }
 

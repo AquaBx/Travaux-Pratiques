@@ -97,5 +97,11 @@
     <ClInclude Include="src\panning.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\compressor.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\echo.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
