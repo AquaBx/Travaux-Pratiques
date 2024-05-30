@@ -2,21 +2,22 @@
 
 #include "filtre_base.h"
 
-class multiplicateur : public filtre_base {
+// multiplicateur
+class multiplicateur : public filtre_base
+{
+public :
+	multiplicateur() : filtre_base(2, 1)
+	{
+	}
 
-	public :
-		multiplicateur() : filtre_base( 2, 1 ) {
+	void calculer() override
+	{
+		if (yaDesEchantillons())
+		{
+
+			const double c = m_lesEntrees[0]->extraire() * m_lesEntrees[1]->extraire();
+
+			m_lesSorties[0]->inserer(c);
 		}
-
-		void calculer() override {
-			if (yaDesEchantillons()) {
-				double a = m_lesEntrees[0]->extraire();
-				double b = m_lesEntrees[1]->extraire();
-
-				double c = a * b;
-
-				m_lesSorties[0]->inserer(c);
-			}
-		}
-
+	}
 };

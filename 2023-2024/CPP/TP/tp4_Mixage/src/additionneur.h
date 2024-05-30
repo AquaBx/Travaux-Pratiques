@@ -2,21 +2,31 @@
 
 #include "filtre_base.h"
 
-class additionneur : public filtre_base {
 
+/* classe additionneur
+
+elle va prendre n entrées pour les mettre sur une seule sortie
+
+*/
+class additionneur : public filtre_base
+{
 public:
-	additionneur(unsigned int n) : filtre_base(n, 1) {}
+	additionneur(unsigned int n) : filtre_base(n, 1)
+	{
+	}
 
-	void calculer() override {
-		if (yaDesEchantillons()) {
+	void calculer() override
+	{
+		if (yaDesEchantillons())
+		{
 			double s = 0;
 
-			for (int i = 0 ; i < nbEntrees(); i++) {
-				s+= getEntree(i)->extraire();
+			for (unsigned int i = 0; i < nbEntrees(); i++)
+			{
+				s += getEntree(i)->extraire();
 			}
 
 			getSortie(0)->inserer(s);
 		}
 	}
-
 };

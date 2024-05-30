@@ -2,13 +2,22 @@
 
 #include "filtre_base.h"
 
+/* classe compressor
+
+implémentation du compresseur
+
+ */
 class compressor : public filtre_base
 {
-	double  c;
-public:
-	compressor(double force) : filtre_base(1, 1), c(force) {}
+	double c;
 
-	void calculer() override {
+public:
+	compressor(double force) : filtre_base(1, 1), c(force)
+	{
+	}
+
+	void calculer() override
+	{
 		if (yaDesEchantillons())
 		{
 			double sig = getEntree(0)->extraire();
