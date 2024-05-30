@@ -78,7 +78,7 @@
     <ClCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>$(MSBuildStartupDirectory)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -91,7 +91,7 @@
     <ClCompile>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>$(MSBuildStartupDirectory)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -104,7 +104,7 @@
     <ClCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>$(MSBuildStartupDirectory)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -119,7 +119,7 @@
     <ClCompile>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>$(MSBuildStartupDirectory)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildProjectDirectory)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -146,6 +146,8 @@
     <ClInclude Include="include\producteur.h" />
     <ClInclude Include="src\additionneur.h" />
     <ClInclude Include="src\consommateur_base.h" />
+    <ClInclude Include="src\fadein.h" />
+    <ClInclude Include="src\fadeout.h" />
     <ClInclude Include="src\filtre_base.h" />
     <ClInclude Include="src\filtre_compose.h" />
     <ClInclude Include="src\harmonique.h" />
@@ -154,6 +156,7 @@
     <ClInclude Include="src\mixeur.h" />
     <ClInclude Include="src\multiplicateur.h" />
     <ClInclude Include="src\operationBinaire.h" />
+    <ClInclude Include="src\panning.h" />
     <ClInclude Include="src\producteur_base.h" />
     <ClInclude Include="src\signal_constant.h" />
     <ClInclude Include="src\volume.h" />
