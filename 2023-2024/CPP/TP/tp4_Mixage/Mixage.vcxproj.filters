@@ -88,7 +88,7 @@
     <ClInclude Include="include\producteur.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\fadein.h">
+    <ClInclude Include="src\fade.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\fadeout.h">
@@ -101,6 +101,24 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="src\echo.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lineariser.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\fadein.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\doubleur.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\clamper.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\signal_lineaire.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\delai.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

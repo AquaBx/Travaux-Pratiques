@@ -1,35 +1,25 @@
 ﻿#pragma once
 
-#include "filtre_base.h"
+#include "delai.h"
+#include "doubleur.h"
 
-class echo : public filtre_base
+class echo : public filtre_compose
 {
-	int start;
-	int i = 0;
-	imp_flot monflot;
 
 public:
-	// constructeur, start nombre de tick après lequel l'echo commence
-	echo(int start) : filtre_base(1, 1), start(start)
+	// constructeur, phi nombre de tick après lequel l'echo commence
+	echo(const double phi) : filtre_compose(1, 1)
 	{
-	}
+		const unsigned int i0 = addComponent(new doubleur(2));
+		const unsigned int i1 = addComponent(new delai(phi));
+		const unsigned int i2 = addComponent(new additionneur(2));
 
-	void calculer() override
-	{
-		if (yaDesEchantillons())
-		{
-			double sig = getEntree(0)->extraire();
+		bindEntreeComponent(0, i0, 0);
+		linkEntree(i0, i1, 0, 0);
 
-			monflot.inserer(sig); // on insère dans notre buffer
+		linkEntree(i1, i2, 0, 0);
+		linkEntree(i0, i2, 1, 1);
 
-			if (i >= start)
-			{
-				// si on a atteint le décalage souhaité on ajoute au signal
-				sig += monflot.extraire();
-			}
-
-			getSortie(0)->inserer(sig);
-			i++;
-		}
+		bindSortieComponent(0, i2, 0);
 	}
 };

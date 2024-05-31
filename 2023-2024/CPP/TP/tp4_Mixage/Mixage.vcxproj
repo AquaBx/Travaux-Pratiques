@@ -145,9 +145,13 @@
     <ClInclude Include="include\flot.h" />
     <ClInclude Include="include\producteur.h" />
     <ClInclude Include="src\additionneur.h" />
+    <ClInclude Include="src\clamper.h" />
     <ClInclude Include="src\compressor.h" />
     <ClInclude Include="src\consommateur_base.h" />
+    <ClInclude Include="src\delai.h" />
+    <ClInclude Include="src\doubleur.h" />
     <ClInclude Include="src\echo.h" />
+    <ClInclude Include="src\fade.h" />
     <ClInclude Include="src\fadein.h" />
     <ClInclude Include="src\fadeout.h" />
     <ClInclude Include="src\filtre_base.h" />
@@ -155,12 +159,14 @@
     <ClInclude Include="src\harmonique.h" />
     <ClInclude Include="src\imp_flot.h" />
     <ClInclude Include="src\lecteur_fichier.h" />
+    <ClInclude Include="src\lineariser.h" />
     <ClInclude Include="src\mixeur.h" />
     <ClInclude Include="src\multiplicateur.h" />
     <ClInclude Include="src\operationBinaire.h" />
     <ClInclude Include="src\panning.h" />
     <ClInclude Include="src\producteur_base.h" />
     <ClInclude Include="src\signal_constant.h" />
+    <ClInclude Include="src\signal_lineaire.h" />
     <ClInclude Include="src\volume.h" />
     <ClInclude Include="src\volume_compose.h" />
   </ItemGroup>
