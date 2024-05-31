@@ -20,6 +20,7 @@
 
 #include "compressor.h"
 #include "echo.h"
+#include "fade.h"
 #include "fadein.h"
 #include "fadeout.h"
 #include "lecteur_fichier.h"
@@ -191,7 +192,7 @@ void fade_f()
 {
 	harmonique la440(440);
 
-	fadein fade1(0, 24000);
+	fadein fade1(12000, 24000);
 	fadeout fade2(64200, 88200);
 
 	enregistreur_fichier enregistreur("out/fadeinout.raw", 1);

@@ -1,23 +1,11 @@
 ﻿#pragma once
-#include "fadein.h"
+#include "fade.h"
 
-class fadeout : public fadein
+class fadeout : public fade< way::out>
 {
-protected:
-	// override du getmult du fade in
-	double getmult() override
-	{
-		return i >= s ? (e - i) / (e - s) : 1;
-	}
 
 public:
-	//constructeur qui prend un début et une fin en tick
-	fadeout(float start, float end) : fadein(start, end)
-	{
-	}
-
-	void calculer() override
-	{
-		fadein::calculer();
-	}
+	// constructeur prend un tick de début et un de fin
+	fadeout(float start, float end) : fade(start, end)
+	{}
 };
